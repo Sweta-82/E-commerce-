@@ -23,6 +23,7 @@ import MyOrder from './Order/MyOrder'
 import Dashboard from './Admin/Dashboard'
 import ProductList from './Admin/ProductList'
 import CreateProduct from './Admin/CreateProduct'
+import AdminNotifications from './Admin/AdminNotifications'
 function App() {
   const { isAuthenticated, user } = useSelector(state => state.user);
   const dispatch = useDispatch()
@@ -57,6 +58,7 @@ function App() {
 
           {/* admin  */}
           <Route path="/admin/dashboard" element={<Dashboard />} adminOnly={true} />
+          <Route path="/admin/notifications" element={<AdminNotifications />} adminOnly={true} />
           <Route path="/orders/user" element={<MyOrder />} />
           <Route path="/admin/products" element={<ProductList />} />
           <Route path="/admin/products/create" element={<CreateProduct />} />

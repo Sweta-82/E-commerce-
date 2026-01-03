@@ -129,7 +129,7 @@ function ProductDetails() {
 
   return (
     <>
-      <PageTitle title={`${product.name} - Details`} />
+      <PageTitle title={`${product.title} - Details`} />
       <Navbar />
       <div className="max-w-5xl mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row gap-8 bg-white shadow-md rounded-lg p-6">
@@ -137,14 +137,14 @@ function ProductDetails() {
           <div className="md:w-1/2 flex justify-center items-center">
             <img
               src={selectedImage?.replace('./', '/')}
-              alt={product.name}
+              alt={product.title}
               className="rounded-lg max-h-96 object-contain"
             />
           </div>
 
           {/* Product Info */}
           <div className="md:w-1/2 space-y-4">
-            <h2 className="text-3xl font-semibold text-gray-800">{product.name}</h2>
+            <h2 className="text-3xl font-semibold text-gray-800">{product.title}</h2>
             <p className="text-gray-600">{product.description}</p>
             <p className="text-xl font-bold text-orange-600">Price: ₹ {product.price}</p>
 

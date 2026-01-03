@@ -32,7 +32,14 @@ function Payment() {
   };
 
   const order = {
-    shippingInfo,
+    shippingInfo: {
+      address: shippingInfo.address,
+      city: shippingInfo.city,
+      state: shippingInfo.state,
+      country: shippingInfo.country,
+      pincode: shippingInfo.pinCode ? shippingInfo.pinCode.toString() : "",
+      phoneNo: shippingInfo.phoneNumber ? parseInt(shippingInfo.phoneNumber) : 0,
+    },
     orderItems: cartItems,
     itemPrice: orderInfo?.subtotal,
     taxPrice: orderInfo?.tax,
@@ -52,6 +59,7 @@ function Payment() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    console.log("DEBUG ORDER PAYLOAD:", order);
     setLoading(true);
 
     try {

@@ -24,18 +24,16 @@ function CheckoutPath({ activePath = 0 }) {
       {path.map((step, index) => (
         <div
           key={index}
-          className={`flex flex-col items-center text-sm font-medium ${
-            index === activePath
-              ? "text-blue-600 font-semibold"
+          className={`flex flex-col items-center text-sm font-medium ${index <= activePath
+              ? "text-green-600 font-semibold"
               : "text-gray-500"
-          }`}
+            }`}
         >
           <div
-            className={`w-10 h-10 flex items-center justify-center text-xl rounded-full border-2 ${
-              index === activePath
-                ? "border-blue-600 bg-blue-100"
+            className={`w-10 h-10 flex items-center justify-center text-xl rounded-full border-2 ${index <= activePath
+                ? "border-green-600 bg-green-100 text-green-600"
                 : "border-gray-300 bg-gray-100"
-            }`}
+              }`}
           >
             {step.icon}
           </div>
