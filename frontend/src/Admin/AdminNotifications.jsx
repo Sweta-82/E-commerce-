@@ -19,6 +19,11 @@ const AdminNotifications = () => {
                 const sortedOrders = data.orders.sort((a, b) => new Date(b.createAt) - new Date(a.createAt));
                 setOrders(sortedOrders);
                 setLoading(false);
+
+                // Mark as read
+                if (data.unreadCount > 0) {
+                    await axios.put('/api/v1/admin/orders/notifications');
+                }
             } catch (error) {
                 toast.error('Failed to load notifications');
                 setLoading(false);
@@ -27,6 +32,21 @@ const AdminNotifications = () => {
 
         fetchNotifications();
     }, []);
+
+    const handleStatusUpdate = async (orderId, newStatus) => {
+        try {
+            await axios.put(`/api/v1/admin/order/${orderId}`, { status: newStatus });
+            toast.success(`Order status updated to ${newStatus}`);
+            // Refresh list locally
+            setOrders(prevOrders =>
+                prevOrders.map(order =>
+                    order._id === orderId ? { ...order, orderStatus: newStatus } : order
+                )
+            );
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Failed to update status");
+        }
+    };
 
     return (
         <>
@@ -72,8 +92,8 @@ const AdminNotifications = () => {
                                                 ₹{order.totalPrice}
                                             </span>
                                             <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold mt-2 ${order.orderStatus === 'Delivered' ? 'bg-green-100 text-green-800' :
-                                                    order.orderStatus === 'Shipped' ? 'bg-blue-100 text-blue-800' :
-                                                        'bg-yellow-100 text-yellow-800'
+                                                order.orderStatus === 'Shipped' ? 'bg-blue-100 text-blue-800' :
+                                                    'bg-yellow-100 text-yellow-800'
                                                 }`}>
                                                 {order.orderStatus}
                                             </span>

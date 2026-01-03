@@ -106,10 +106,28 @@ export const getAdminProductOrders = handleAsyncError(async (req, res, next) => 
         "orderItems.product": { $in: productIds }
     });
 
+    const unreadCount = orders.filter(order => !order.isSeenByAdmin).length;
+
     res.status(200).json({
         success: true,
         count: orders.length,
+        unreadCount,
         orders
+    });
+});
+
+// Mark admin notifications as read
+export const markNotificationsAsRead = handleAsyncError(async (req, res, next) => {
+    const products = await Product.find({ user: req.user._id });
+    const productIds = products.map(product => product._id);
+
+    await Order.updateMany(
+        { "orderItems.product": { $in: productIds }, isSeenByAdmin: false },
+        { $set: { isSeenByAdmin: true } }
+    );
+
+    res.status(200).json({
+        success: true
     });
 });
 

@@ -29,7 +29,7 @@ function Navbar() {
       const fetchNotifications = async () => {
         try {
           const { data } = await axios.get('/api/v1/admin/orders/notifications');
-          setNotificationCount(data.count);
+          setNotificationCount(data.unreadCount);
         } catch (error) {
           console.error("Failed to fetch notifications", error);
         }
