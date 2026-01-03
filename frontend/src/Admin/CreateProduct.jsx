@@ -18,7 +18,7 @@ function CreateProduct() {
   const [images, setimages] = useState([]);
   const [imagePreviews, setImagePreviews] = useState([]);
 
-  const categories = ['Electronics', 'Clothing', 'Books', 'Grocery'];
+  const categories = ['Electronics', 'Clothing', 'Books', 'Grocery', 'Makeup', 'Heels', 'Shoes', 'Laptop', 'Glass', 'Shirts'];
   const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 
   const handleImageChange = (e) => {

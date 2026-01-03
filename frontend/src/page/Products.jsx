@@ -19,7 +19,8 @@ function Products() {
   const navigate = useNavigate();
   const [keyword] = useState('');
   // const [currentPage] = useState(1);
-  const [category] = ['laptop', 'glass', 'shoes', 'shirt'];
+  const [category, setCategory] = useState('');
+  const categories = ['Electronics', 'Clothing', 'Books', 'Grocery', 'Makeup', 'Heels', 'Shoes', 'Laptop', 'Glass', 'Shirts'];
 
   useEffect(() => {
     dispatch(getProduct({ keyword, page: currentPage, category }));
@@ -56,8 +57,15 @@ function Products() {
             <div className="w-1/5">
               <h3 className="text-xl font-semibold mb-4">Categories</h3>
               <div className="flex flex-col gap-2">
-                <button className="bg-gray-100 p-2 rounded hover:bg-blue-100">Shirts</button>
-                <button className="bg-gray-100 p-2 rounded hover:bg-blue-100">Shoes</button>
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    className={`p-2 rounded text-left ${category === cat ? "bg-blue-500 text-white" : "bg-gray-100 hover:bg-blue-100 text-gray-800"}`}
+                    onClick={() => setCategory(cat)}
+                  >
+                    {cat}
+                  </button>
+                ))}
               </div>
             </div>
 
