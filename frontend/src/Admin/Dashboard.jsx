@@ -43,7 +43,7 @@ function Dashboard() {
         {/* Sidebar */}
         <aside className="w-64 bg-white shadow-lg p-6 flex flex-col justify-between hidden md:flex">
           <div>
-            <h2 className="flex items-center text-2xl font-bold mb-8 gap-2 text-blue-600 border-b pb-4">
+            <h2 className="flex items-center text-2xl font-bold mb-8 gap-2 text-black border-b pb-4">
               <MdDashboard size={28} />
               Dashboard
             </h2>
@@ -101,26 +101,26 @@ function Dashboard() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 
             {/* Card: Total Income */}
-            <div className="bg-white shadow-lg rounded-xl p-6 border-l-4 border-green-500 transform hover:-translate-y-1 transition-transform duration-300">
+            <div className="bg-white shadow-lg rounded-xl p-6 border-l-4 border-black transform hover:-translate-y-1 transition-transform duration-300">
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="text-lg font-semibold text-gray-600">Total Income</h3>
                   <p className="mt-2 text-gray-800 text-3xl font-bold">₹{stats.totalIncome}</p>
                 </div>
-                <div className="p-3 bg-green-100 text-green-600 rounded-full">
+                <div className="p-3 bg-black text-white rounded-full">
                   <FaCartArrowDown size={20} />
                 </div>
               </div>
             </div>
 
             {/* Card: Products */}
-            <div className="bg-white shadow-lg rounded-xl p-6 border-l-4 border-blue-500 transform hover:-translate-y-1 transition-transform duration-300">
+            <div className="bg-white shadow-lg rounded-xl p-6 border-l-4 border-black transform hover:-translate-y-1 transition-transform duration-300">
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="text-lg font-semibold text-gray-600">Products</h3>
                   <p className="mt-2 text-gray-800 text-3xl font-bold">{stats.productCount}</p>
                 </div>
-                <div className="p-3 bg-blue-100 text-blue-600 rounded-full">
+                <div className="p-3 bg-black text-white rounded-full">
                   <FaBoxArchive size={20} />
                 </div>
               </div>
@@ -131,26 +131,26 @@ function Dashboard() {
             </div>
 
             {/* Card: Orders */}
-            <div className="bg-white shadow-lg rounded-xl p-6 border-l-4 border-yellow-500 transform hover:-translate-y-1 transition-transform duration-300">
+            <div className="bg-white shadow-lg rounded-xl p-6 border-l-4 border-black transform hover:-translate-y-1 transition-transform duration-300">
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="text-lg font-semibold text-gray-600">Msg Orders</h3>
                   <p className="mt-2 text-gray-800 text-3xl font-bold">{stats.orderCount}</p>
                 </div>
-                <div className="p-3 bg-yellow-100 text-yellow-600 rounded-full">
+                <div className="p-3 bg-black text-white rounded-full">
                   <MdDashboard size={20} />
                 </div>
               </div>
             </div>
 
             {/* Card: Users */}
-            <div className="bg-white shadow-lg rounded-xl p-6 border-l-4 border-purple-500 transform hover:-translate-y-1 transition-transform duration-300">
+            <div className="bg-white shadow-lg rounded-xl p-6 border-l-4 border-black transform hover:-translate-y-1 transition-transform duration-300">
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="text-lg font-semibold text-gray-600">Users</h3>
                   <p className="mt-2 text-gray-800 text-3xl font-bold">{stats.userCount}</p>
                 </div>
-                <div className="p-3 bg-purple-100 text-purple-600 rounded-full">
+                <div className="p-3 bg-black text-white rounded-full">
                   <ImUsers size={20} />
                 </div>
               </div>

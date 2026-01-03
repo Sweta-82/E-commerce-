@@ -63,7 +63,7 @@ function ProductList() {
             {/* Table */}
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-[#fff001] text-gray-900">
+                <thead className="bg-black text-white">
                   <tr>
                     <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Sl No.</th>
                     <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">Product</th>
