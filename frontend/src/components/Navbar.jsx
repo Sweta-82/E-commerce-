@@ -47,7 +47,10 @@ function Navbar() {
         {/* Left Section: Logo + Links */}
         <div className="flex items-center gap-10">
           {/* Logo */}
-          <div className="text-2xl font-bold text-[#fbf504] font-mono">MyLogo</div>
+          {/* Logo */}
+          <Link to="/">
+            <img src="/image.png" alt="Ecommerce Logo" className="h-12 w-auto object-contain" />
+          </Link>
 
           {/* Links */}
           <ul className="hidden sm:flex gap-6 text-sm font-medium">

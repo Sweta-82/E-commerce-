@@ -93,7 +93,10 @@ function OrderList() {
                                             <td className="px-4 py-4 text-sm font-bold">₹{order.totalPrice}</td>
                                             <td className="px-4 py-4 text-sm text-gray-500">{new Date(order.createAt).toLocaleDateString()}</td>
                                             <td className="px-4 py-4 text-sm space-x-2 flex">
-                                                {/* In a real app, you might want an Edit page. For now, we reuse the Logic or just Show Delete */}
+                                                {/* Edit Order Link */}
+                                                <Link to={`/admin/order/${order._id}`}>
+                                                    <FaEdit className="text-blue-500 hover:text-blue-700" />
+                                                </Link>
                                                 <button onClick={() => handleDelete(order._id)} className="text-red-500 hover:text-red-700">
                                                     <FaTrash />
                                                 </button>

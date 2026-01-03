@@ -47,6 +47,22 @@ export const updateProduct = createAsyncThunk('admin/updateProduct', async ({ id
     }
 })
 
+// update order
+export const updateOrder = createAsyncThunk('admin/updateOrder', async ({ id, orderData }, { rejectWithValue }) => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        const { data } = await axios.put(`/api/v1/admin/order/${id}`, orderData, config)
+        return data
+    }
+    catch (error) {
+        return rejectWithValue(error.response?.data || "Order update failed.")
+    }
+})
+
 
 const adminSlice = createSlice({
     name: 'admin',
@@ -54,10 +70,8 @@ const adminSlice = createSlice({
         products: [],
         productCount: 0,
         resultPerPage: 1,
-        resultPerPage: 1,
         success: false,
         isUpdated: false,
-        loading: false,
         loading: false,
         error: null
     },
@@ -121,6 +135,20 @@ const adminSlice = createSlice({
             .addCase(updateProduct.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload?.message || 'Product update failed.';
+            })
+
+            // updateOrder
+            .addCase(updateOrder.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(updateOrder.fulfilled, (state, action) => {
+                state.loading = false;
+                state.isUpdated = action.payload.success;
+            })
+            .addCase(updateOrder.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload?.message || 'Order update failed.';
             })
     }
 })
