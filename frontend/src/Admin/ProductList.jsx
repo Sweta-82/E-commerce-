@@ -5,33 +5,36 @@ import PageTitle from '../components/PageTitle';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAdminProducts } from '../features/admin/adminSlice';
 import { Link } from 'react-router-dom';
-import Loader from '../components/Loader'
+import GenericPagination from '../components/GenericPagination';
+
 function ProductList() {
-    const {products, loading, error}=useSelector(state=>state.admin);
-    console.log("Product full data",products);
-    const dispatch=useDispatch();
-    useEffect(()=>{
-        dispatch(fetchAdminProducts())
-    },[dispatch])
-    
+  const { products, loading, error, productCount, resultPerPage } = useSelector(state => state.admin);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const dispatch = useDispatch();
 
-    useEffect(()=>{
-      
-    })
+  useEffect(() => {
+    dispatch(fetchAdminProducts(currentPage))
+  }, [dispatch, currentPage])
 
-    if(loading){
-      return <Loader/>
-    }
+  const totalPages = Math.ceil(productCount / resultPerPage);
 
-    if(!products || products.length===0){
-      return (
-        <div className="bg-white p-6 rounded-2xl shadow-md text-center">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">Admin Products</h1>
-          <p className="text-gray-500 text-lg">No Products Found</p>
-        </div>
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  }
 
-      )
-    }
+  if (loading) {
+    return <Loader />
+  }
+
+  if (!products || products.length === 0) {
+    return (
+      <div className="bg-white p-6 rounded-2xl shadow-md text-center">
+        <h1 className="text-3xl font-bold text-gray-800 mb-4">Admin Products</h1>
+        <p className="text-gray-500 text-lg">No Products Found</p>
+      </div>
+
+    )
+  }
 
   return (
     <>
@@ -57,32 +60,37 @@ function ProductList() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                  {products.map((product, index) => (
-                    <tr key={product._id}>
-                      <td className="px-4 py-4 text-sm">{index + 1}</td>
-                      <td className="px-4 py-4 text-sm">
-                        <img src={product.image?.[0]?.url || 'https://via.placeholder.com/50'} alt={product.name} className="w-12 h-12 object-cover" />
-                      </td>
-                      <td className="px-4 py-4 text-sm">{product.name}</td>
-                      <td className="px-4 py-4 text-sm">₹{product.price}</td>
-                      <td className="px-4 py-4 text-sm">{product.ratings}</td>
-                      <td className="px-4 py-4 text-sm">{product.category}</td>
-                      <td className="px-4 py-4 text-sm">{product.stock}</td>
-                      <td className="px-4 py-4 text-sm">{new Date(product.createdAt).toLocaleString()}</td>
-                      <td className="px-4 py-4 text-sm space-x-2">
+                {products.map((product, index) => (
+                  <tr key={product._id}>
+                    <td className="px-4 py-4 text-sm">{index + 1}</td>
+                    <td className="px-4 py-4 text-sm">
+                      <img src={product.image?.[0]?.url || 'https://via.placeholder.com/50'} alt={product.name} className="w-12 h-12 object-cover" />
+                    </td>
+                    <td className="px-4 py-4 text-sm">{product.name}</td>
+                    <td className="px-4 py-4 text-sm">₹{product.price}</td>
+                    <td className="px-4 py-4 text-sm">{product.ratings}</td>
+                    <td className="px-4 py-4 text-sm">{product.category}</td>
+                    <td className="px-4 py-4 text-sm">{product.stock}</td>
+                    <td className="px-4 py-4 text-sm">{new Date(product.createdAt).toLocaleString()}</td>
+                    <td className="px-4 py-4 text-sm space-x-2">
 
-                        <Link to={`/admin/product/${product._id}`}>
-                        
+                      <Link to={`/admin/product/${product._id}`}>
+
                         <button className="px-3 py-1 bg-[#fff001] text-black rounded-md font-medium hover:brightness-90">Edit</button>
                         <button className="px-3 py-1 bg-red-500 text-white rounded-md font-medium hover:bg-red-600">Delete</button>
-                        </Link>
-                      </td>
-                    </tr>
-  ))}
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
 
             </table>
           </div>
+          <GenericPagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
       </div>
 

@@ -8,14 +8,21 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 
+import GenericPagination from '../components/GenericPagination';
+
 function OrderList() {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
-    const fetchOrders = async () => {
+    const fetchOrders = async (page = 1) => {
         try {
-            const { data } = await axios.get('/api/v1/admin/orders');
+            const { data } = await axios.get(`/api/v1/admin/orders?page=${page}`);
             setOrders(data.orders);
+            const count = data.ordersCount || data.orders.length; // Fallback if count missing
+            const perPage = data.resultPerPage || 8;
+            setTotalPages(Math.ceil(count / perPage));
             setLoading(false);
         } catch (error) {
             toast.error('Failed to fetch orders');
@@ -24,8 +31,12 @@ function OrderList() {
     };
 
     useEffect(() => {
-        fetchOrders();
-    }, []);
+        fetchOrders(currentPage);
+    }, [currentPage]);
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
 
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this order?')) {
@@ -72,8 +83,8 @@ function OrderList() {
                                             <td className="px-4 py-4 text-sm font-mono">{order._id}</td>
                                             <td className="px-4 py-4 text-sm">
                                                 <span className={`px-2 py-1 rounded-full text-xs font-semibold ${order.orderStatus === 'Delivered' ? 'bg-green-100 text-green-800' :
-                                                        order.orderStatus === 'Shipped' ? 'bg-blue-100 text-blue-800' :
-                                                            'bg-yellow-100 text-yellow-800'
+                                                    order.orderStatus === 'Shipped' ? 'bg-blue-100 text-blue-800' :
+                                                        'bg-yellow-100 text-yellow-800'
                                                     }`}>
                                                     {order.orderStatus}
                                                 </span>
@@ -93,6 +104,11 @@ function OrderList() {
                             </table>
                         </div>
                     )}
+                    <GenericPagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={handlePageChange}
+                    />
                 </div>
             </div>
             <Footer />

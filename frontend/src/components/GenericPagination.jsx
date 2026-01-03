@@ -1,0 +1,88 @@
+import React from 'react';
+
+function GenericPagination({
+    currentPage,
+    totalPages,
+    onPageChange,
+    nextPageText = "Next",
+    prevPageText = "Prev",
+    firstPageText = '1st',
+    lastPageText = 'Last'
+}) {
+
+    if (totalPages <= 1) {
+        return null;
+    }
+
+    const getPageNumbers = () => {
+        const pageNumbers = [];
+        const pageWindow = 2; // Show 2 pages on either side of current
+
+        for (
+            let i = Math.max(1, currentPage - pageWindow);
+            i <= Math.min(totalPages, currentPage + pageWindow);
+            i++
+        ) {
+            pageNumbers.push(i);
+        }
+
+        return pageNumbers;
+    };
+
+    return (
+        <div className="flex flex-wrap justify-center gap-2 mt-6">
+            {/* First & Prev */}
+            {currentPage > 1 && (
+                <>
+                    <button
+                        className="px-3 py-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-100"
+                        onClick={() => onPageChange(1)}
+                    >
+                        {firstPageText}
+                    </button>
+                    <button
+                        className="px-3 py-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-100"
+                        onClick={() => onPageChange(currentPage - 1)}
+                    >
+                        {prevPageText}
+                    </button>
+                </>
+            )}
+
+            {/* Page Numbers */}
+            {getPageNumbers().map((number) => (
+                <button
+                    key={number}
+                    onClick={() => onPageChange(number)}
+                    className={`px-3 py-1 text-sm font-medium border rounded 
+            ${currentPage === number
+                            ? 'bg-[#fff001] text-black border-[#fff001] font-bold'
+                            : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
+                        }`}
+                >
+                    {number}
+                </button>
+            ))}
+
+            {/* Next & Last */}
+            {currentPage < totalPages && (
+                <>
+                    <button
+                        className="px-3 py-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-100"
+                        onClick={() => onPageChange(currentPage + 1)}
+                    >
+                        {nextPageText}
+                    </button>
+                    <button
+                        className="px-3 py-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-100"
+                        onClick={() => onPageChange(totalPages)}
+                    >
+                        {lastPageText}
+                    </button>
+                </>
+            )}
+        </div>
+    );
+}
+
+export default GenericPagination;

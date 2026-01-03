@@ -58,18 +58,41 @@ export const allMyOrder = handleAsyncError(async (req, res, next) => {
     })
 })
 
-// getting all order
+// getting all order -- Admin
 export const getAllMyOrder = handleAsyncError(async (req, res, next) => {
-    const orders = await Order.find();
+    const resultPerPage = 8;
+    const ordersCount = await Order.countDocuments();
+
+    const apiFeature = new APIFunctionality(Order.find(), req.query)
+        .search()
+        .filter()
+        .pagination(resultPerPage);
+
+    const orders = await apiFeature.query;
+
     let totalAmount = 0;
-    orders.forEach(order => {
-        totalAmount += order.totalPrice;
-    })
+    // Calculate total amount for all orders (not just paginated ones) - Optional, but expensive query. 
+    // For now let's just sum paginated ones or do a separate aggregate if needed.
+    // The original logic summed ALL. Doing that is heavy. 
+    // Let's do a simple aggregate for totalAmount separately if critical.
+    // For now, removing the heavy loop over all orders and just return paginated orders.
+
+    // const ordersTotal = await Order.find(); // Too heavy. 
+    // ordersTotal.forEach(order => {
+    //     totalAmount += order.totalPrice;
+    // })
+    // Better way for totalAmount:
+    const totalAmountAgg = await Order.aggregate([
+        { $group: { _id: null, total: { $sum: "$totalPrice" } } }
+    ]);
+    totalAmount = totalAmountAgg.length > 0 ? totalAmountAgg[0].total : 0;
 
     res.status(200).json({
         success: true,
         orders,
-        totalAmount
+        totalAmount,
+        ordersCount,
+        resultPerPage
     })
 })
 // update order status

@@ -6,6 +6,8 @@ import { sendToken } from "../utils/jwtToken.js";
 import { sendEmail } from "../utils/sendEmail.js";
 import { v2 as cloudinary } from 'cloudinary';
 import { url } from 'inspector';
+import APIFunctionality from '../utils/apiFunctionality.js';
+
 export const registerUser = handleAsyncError(async (req, res, next) => {
     const { name, email, password, avatar } = req.body;
     const myCloud = await cloudinary.uploader.upload(avatar, {
@@ -185,10 +187,21 @@ export const updateProfile = handleAsyncError(async (req, res, next) => {
 
 // admin geting user info
 export const getUserList = handleAsyncError(async (req, res, next) => {
-    const users = await User.find();
+    const resultPerPage = 8;
+    const usersCount = await User.countDocuments();
+
+    const apiFeature = new APIFunctionality(User.find(), req.query)
+        .search()
+        .filter()
+        .pagination(resultPerPage);
+
+    const users = await apiFeature.query;
+
     res.status(200).json({
         success: true,
-        users
+        users,
+        usersCount,
+        resultPerPage
     })
 })
 

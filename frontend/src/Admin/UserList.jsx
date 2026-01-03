@@ -7,14 +7,21 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { FaTrash, FaUserEdit } from 'react-icons/fa';
 
+import GenericPagination from '../components/GenericPagination';
+
 function UserList() {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
-    const fetchUsers = async () => {
+    const fetchUsers = async (page = 1) => {
         try {
-            const { data } = await axios.get('/api/v1/admin/users');
+            const { data } = await axios.get(`/api/v1/admin/users?page=${page}`);
             setUsers(data.users);
+            const count = data.usersCount || data.users.length;
+            const perPage = data.resultPerPage || 8;
+            setTotalPages(Math.ceil(count / perPage));
             setLoading(false);
         } catch (error) {
             toast.error('Failed to fetch users');
@@ -23,8 +30,12 @@ function UserList() {
     };
 
     useEffect(() => {
-        fetchUsers();
-    }, []);
+        fetchUsers(currentPage);
+    }, [currentPage]);
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
 
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this user?')) {
@@ -107,6 +118,11 @@ function UserList() {
                             </table>
                         </div>
                     )}
+                    <GenericPagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={handlePageChange}
+                    />
                 </div>
             </div>
             <Footer />
