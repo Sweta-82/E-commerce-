@@ -15,7 +15,11 @@ function UserDashboard({ user }) {
 
   const orders = () => {
     setMenuVisible(false);
-    navigate("/orders/user");
+    if (user?.role === 'admin') {
+      navigate("/admin/orders");
+    } else {
+      navigate("/orders/user");
+    }
   };
 
   const profile = () => {

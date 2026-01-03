@@ -27,6 +27,7 @@ import AdminNotifications from './Admin/AdminNotifications'
 import OrderList from './Admin/OrderList'
 import UserList from './Admin/UserList'
 import ProductReviews from './Admin/ProductReviews'
+import UpdateProduct from './Admin/UpdateProduct'
 function App() {
 
   const { isAuthenticated, user } = useSelector(state => state.user);
@@ -68,6 +69,7 @@ function App() {
           <Route path="/orders/user" element={<MyOrder />} />
           <Route path="/admin/products" element={<ProductList />} />
           <Route path="/admin/products/create" element={<CreateProduct />} />
+          <Route path="/admin/product/:id" element={<UpdateProduct />} />
           <Route path="/admin/reviews" element={<ProductReviews />} />
 
 

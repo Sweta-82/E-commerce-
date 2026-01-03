@@ -31,6 +31,22 @@ export const createProduct = createAsyncThunk('admin/createProduct', async (prod
     }
 })
 
+// update product
+export const updateProduct = createAsyncThunk('admin/updateProduct', async ({ id, productData }, { rejectWithValue }) => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }
+        const { data } = await axios.put(`/api/v1/admin/product/${id}`, productData, config)
+        return data
+    }
+    catch (error) {
+        return rejectWithValue(error.response?.data || "Product update failed.")
+    }
+})
+
 
 const adminSlice = createSlice({
     name: 'admin',
@@ -38,7 +54,10 @@ const adminSlice = createSlice({
         products: [],
         productCount: 0,
         resultPerPage: 1,
+        resultPerPage: 1,
         success: false,
+        isUpdated: false,
+        loading: false,
         loading: false,
         error: null
     },
@@ -48,6 +67,9 @@ const adminSlice = createSlice({
         },
         removeSuccess: (state) => {
             state.success = false;
+        },
+        resetUpdate: (state) => {
+            state.isUpdated = false;
         }
     },
     extraReducers: (builder) => {
@@ -86,8 +108,22 @@ const adminSlice = createSlice({
                 state.loading = false,
                     state.error = action.payload?.message || 'Product creation failed.'
             })
+
+        builder
+            .addCase(updateProduct.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(updateProduct.fulfilled, (state, action) => {
+                state.loading = false;
+                state.isUpdated = action.payload.success;
+            })
+            .addCase(updateProduct.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload?.message || 'Product update failed.';
+            })
     }
 })
 
-export const { removeErrors, removeSuccess } = adminSlice.actions
+export const { removeErrors, removeSuccess, resetUpdate } = adminSlice.actions
 export default adminSlice.reducer

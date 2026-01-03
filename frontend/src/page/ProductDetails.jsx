@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 import Rating from '../components/Rating';
 import Footer from '../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { createReview, getProductDetails, removeErrors } from '../features/products/productSlice';
 import { toast } from 'react-toastify';
 import Loader from '../components/Loader';
@@ -20,6 +20,7 @@ function ProductDetails() {
 
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { loading, error, product, reviewSuccess, reviewLoading } = useSelector((state) => state.product);
   const { error: cartError, success, message } = useSelector((state) => state.cart);
@@ -105,6 +106,12 @@ function ProductDetails() {
       setSelectedImage(product.image[0].url);
     }
   }, [product]);
+
+
+  const handleCopyId = () => {
+    navigator.clipboard.writeText(product._id);
+    toast.success('Product ID Copied!', { position: 'top-center', autoClose: 2000 });
+  };
 
   if (loading) {
     return (
@@ -199,7 +206,18 @@ function ProductDetails() {
                     <div className="grid grid-cols-2 gap-4 text-sm text-gray-600 mb-5">
                       <div className="bg-gray-50 p-3 rounded-lg">
                         <p className="text-xs text-gray-400 uppercase font-bold mb-1">Product ID</p>
-                        <p className="font-mono text-gray-800 font-semibold truncate" title={product._id}>{product._id}</p>
+                        <div className="flex items-center gap-2">
+                          <p className="font-mono text-gray-800 font-semibold truncate" title={product._id}>{product._id}</p>
+                          <button
+                            onClick={handleCopyId}
+                            className="text-gray-400 hover:text-blue-600 transition-colors p-1 rounded hover:bg-blue-50"
+                            title="Copy ID"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                            </svg>
+                          </button>
+                        </div>
                       </div>
                       <div className="bg-gray-50 p-3 rounded-lg">
                         <p className="text-xs text-gray-400 uppercase font-bold mb-1">Stock Level</p>
@@ -215,7 +233,10 @@ function ProductDetails() {
                       </div>
                     </div>
 
-                    <button className="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold py-3 px-4 rounded-lg transition-all shadow-blue-200 shadow-lg flex items-center justify-center gap-2 group">
+                    <button
+                      onClick={() => navigate(`/admin/product/${product._id}`)}
+                      className="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold py-3 px-4 rounded-lg transition-all shadow-blue-200 shadow-lg flex items-center justify-center gap-2 group"
+                    >
                       <span>Edit Product Details</span>
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
