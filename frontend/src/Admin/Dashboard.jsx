@@ -9,78 +9,153 @@ import { ImUsers } from "react-icons/im";
 import { FaCartArrowDown } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 function Dashboard() {
+  const [stats, setStats] = React.useState({
+    productCount: 0,
+    orderCount: 0,
+    userCount: 0,
+    totalIncome: 0,
+    outOfStock: 0,
+    inStock: 0
+  });
+
+  React.useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const { data } = await axios.get('/api/v1/admin/dashboard/stats');
+        if (data.success) {
+          setStats(data);
+        }
+      } catch (error) {
+        console.error("Dashboard stats fetch failed", error);
+      }
+    }
+    fetchStats();
+  }, []);
+
   return (
     <>
       <Navbar />
       <PageTitle title="Admin Dashboard" />
-      
+
       <div className="min-h-screen flex bg-gray-100">
         {/* Sidebar */}
-        <aside className="w-64 bg-white shadow-lg p-6">
-          <h2 className="flex items-center text-2xl font-bold mb-6 gap-2 text-blue-600">
-            <MdDashboard size={24} />
-            Dashboard
+        <aside className="w-64 bg-white shadow-lg p-6 flex flex-col justify-between hidden md:flex">
+          <div>
+            <h2 className="flex items-center text-2xl font-bold mb-8 gap-2 text-blue-600 border-b pb-4">
+              <MdDashboard size={28} />
+              Dashboard
             </h2>
-          <ul className="space-y-4">
-            <li className="font-semibold text-gray-700">Products</li>
-            <ul className="ml-4 text-gray-600 space-y-2">
-                <Link to ='/admin/products'>
-              <li className='flex items-center gap-2'><FaBoxArchive /> All Products</li>
-                </Link>
-                <Link to={'/admin/products/create'}>
-              <li className='flex items-center gap-2'><MdAddBox /> Create Product</li>
-                </Link>
-            </ul>
+            <ul className="space-y-6">
+              <li>
+                <p className="text-xs font-bold text-gray-400 uppercase mb-2">Inventory</p>
+                <ul className="space-y-2">
+                  <Link to='/admin/products'>
+                    <li className='flex items-center gap-3 text-gray-700 hover:text-blue-600 transition-colors p-2 rounded hover:bg-blue-50 cursor-pointer'>
+                      <FaBoxArchive /> All Products
+                    </li>
+                  </Link>
+                  <Link to='/admin/products/create'>
+                    <li className='flex items-center gap-3 text-gray-700 hover:text-blue-600 transition-colors p-2 rounded hover:bg-blue-50 cursor-pointer'>
+                      <MdAddBox /> Create Product
+                    </li>
+                  </Link>
+                </ul>
+              </li>
 
-            <li className="font-semibold text-gray-700">Users</li>
-            <ul className="ml-4 text-gray-600 space-y-2">
-                <Link to={'/admin/users'}>
-              <li className='flex items-center gap-2'><ImUsers /> All Users</li>
-                </Link>
+              <li>
+                <p className="text-xs font-bold text-gray-400 uppercase mb-2">Management</p>
+                <ul className="space-y-2">
+                  <Link to='/admin/users'>
+                    <li className='flex items-center gap-3 text-gray-700 hover:text-blue-600 transition-colors p-2 rounded hover:bg-blue-50 cursor-pointer'>
+                      <ImUsers /> Users
+                    </li>
+                  </Link>
+                  <Link to='/admin/orders'>
+                    <li className='flex items-center gap-3 text-gray-700 hover:text-blue-600 transition-colors p-2 rounded hover:bg-blue-50 cursor-pointer'>
+                      <FaCartArrowDown /> Orders
+                    </li>
+                  </Link>
+                  <Link to='/admin/reviewsId'>
+                    <li className='flex items-center gap-3 text-gray-700 hover:text-blue-600 transition-colors p-2 rounded hover:bg-blue-50 cursor-pointer'>
+                      <FaStar /> Reviews
+                    </li>
+                  </Link>
+                </ul>
+              </li>
             </ul>
-
-            <li className="font-semibold text-gray-700">Orders</li>
-            <ul className="ml-4 text-gray-600 space-y-2">
-                <Link to={'/admin/orders'}>
-              <li className='flex items-center gap-2'><FaCartArrowDown /> All Orders</li>
-                </Link>
-            </ul>
-
-            <li className="font-semibold text-gray-700">Reviews</li>
-            <ul className="ml-4 text-gray-600 space-y-2">
-                <Link to={'/admin/reviewsId'}>
-              <li className='flex items-center gap-2'><FaStar /> All Reviews</li>
-                </Link>
-            </ul>
-          </ul>
+          </div>
+          <div className="text-xs text-gray-400 text-center mt-10">
+            &copy; 2024 Admin Panel
+          </div>
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-10">
-          <h1 className="text-3xl font-bold mb-6">Admin Panel</h1>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white shadow-md rounded-xl p-6">
+        <main className="flex-1 p-6 md:p-10 overflow-y-auto">
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-3xl font-bold text-gray-800">Overview</h1>
+            <div className="text-gray-500">Welcome back, Admin</div>
+          </div>
 
-              <h3 className="text-xl font-semibold">Total Products</h3>
-              <p className="mt-2 text-gray-600 text-4xl font-bold">52</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+            {/* Card: Total Income */}
+            <div className="bg-white shadow-lg rounded-xl p-6 border-l-4 border-green-500 transform hover:-translate-y-1 transition-transform duration-300">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-600">Total Income</h3>
+                  <p className="mt-2 text-gray-800 text-3xl font-bold">₹{stats.totalIncome}</p>
+                </div>
+                <div className="p-3 bg-green-100 text-green-600 rounded-full">
+                  <FaCartArrowDown size={20} />
+                </div>
+              </div>
             </div>
-            <div className="bg-white shadow-md rounded-xl p-6">
-              <h3 className="text-xl font-semibold">Total Orders</h3>
-              <p className="mt-2 text-gray-600 text-4xl font-bold">52</p>
+
+            {/* Card: Products */}
+            <div className="bg-white shadow-lg rounded-xl p-6 border-l-4 border-blue-500 transform hover:-translate-y-1 transition-transform duration-300">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-600">Products</h3>
+                  <p className="mt-2 text-gray-800 text-3xl font-bold">{stats.productCount}</p>
+                </div>
+                <div className="p-3 bg-blue-100 text-blue-600 rounded-full">
+                  <FaBoxArchive size={20} />
+                </div>
+              </div>
+              <div className="mt-4 flex gap-4 text-sm">
+                <span className="text-green-600 font-medium">{stats.inStock} In Stock</span>
+                <span className="text-red-600 font-medium">{stats.outOfStock} Out of Stock</span>
+              </div>
             </div>
-            <div className="bg-white shadow-md rounded-xl p-6">
-              <h3 className="text-xl font-semibold">Total Reviews</h3>
-              <p className="mt-2 text-gray-600 text-4xl font-bold">52</p>
+
+            {/* Card: Orders */}
+            <div className="bg-white shadow-lg rounded-xl p-6 border-l-4 border-yellow-500 transform hover:-translate-y-1 transition-transform duration-300">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-600">Msg Orders</h3>
+                  <p className="mt-2 text-gray-800 text-3xl font-bold">{stats.orderCount}</p>
+                </div>
+                <div className="p-3 bg-yellow-100 text-yellow-600 rounded-full">
+                  <MdDashboard size={20} />
+                </div>
+              </div>
             </div>
-            <div className="bg-white shadow-md rounded-xl p-6">
-              <h3 className="text-xl font-semibold">Out of Stock</h3>
-              <p className="mt-2 text-gray-600 text-4xl font-bold">52</p>
+
+            {/* Card: Users */}
+            <div className="bg-white shadow-lg rounded-xl p-6 border-l-4 border-purple-500 transform hover:-translate-y-1 transition-transform duration-300">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-600">Users</h3>
+                  <p className="mt-2 text-gray-800 text-3xl font-bold">{stats.userCount}</p>
+                </div>
+                <div className="p-3 bg-purple-100 text-purple-600 rounded-full">
+                  <ImUsers size={20} />
+                </div>
+              </div>
             </div>
-            <div className="bg-white shadow-md rounded-xl p-6">
-              <h3 className="text-xl font-semibold">In Stock</h3>
-              <p className="mt-2 text-gray-600 text-4xl font-bold">52</p>
-            </div>
+
           </div>
         </main>
       </div>

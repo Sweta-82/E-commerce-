@@ -22,5 +22,7 @@ app.use("/api/v1", product)
 app.use("/api/v1", user)
 app.use("/api/v1", order)
 app.use("/api/v1", payment)
+import dashboard from "./routes/dashboardRoute.js";
+app.use("/api/v1", dashboard);
 app.use(errorHandleMiddleware)
 export default app;

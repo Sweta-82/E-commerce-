@@ -6,66 +6,70 @@ import { logout, removeSuccess } from '../features/user/userSlice';
 
 function UserDashboard({ user }) {
 
-  const {cartItems}=useSelector(state=>state.cart)
+  const { cartItems } = useSelector(state => state.cart)
   const [menuVisible, setMenuVisible] = useState(false);
   const navigate = useNavigate();
-  const dispatch=useDispatch();
-  const cart = []; // Update this with actual logic
+  const dispatch = useDispatch();
 
   const toggleMenu = () => setMenuVisible(!menuVisible);
-  
+
   const orders = () => {
-      setMenuVisible(false);
-      navigate("/orders/user");
-    };
-    
-    const profile = () => {
-        setMenuVisible(false);
-        navigate("/profile");
-    };
-    
-    const logoutUser = () => {
-        setMenuVisible(false);
-        console.log("Logout clicked");
-        dispatch(logout()).unwrap()
-       .then(()=>{
-        toast.success('Logout Successful',{position:'top-center',autoClose:3000})
+    setMenuVisible(false);
+    navigate("/orders/user");
+  };
+
+  const profile = () => {
+    setMenuVisible(false);
+    navigate("/profile");
+  };
+
+  const logoutUser = () => {
+    setMenuVisible(false);
+    console.log("Logout clicked");
+    dispatch(logout()).unwrap()
+      .then(() => {
+        toast.success('Logout Successful', { position: 'top-center', autoClose: 3000 })
         dispatch(removeSuccess())
         navigate('/login')
-       })
-       .catch((error)=>{
-        toast.success(error.message || 'Logout Failed',{position:'top-center',autoClose:3000})
-       })
-        
-    };
-    const options = [
+      })
+      .catch((error) => {
+        toast.success(error.message || 'Logout Failed', { position: 'top-center', autoClose: 3000 })
+      })
+
+  };
+
+  function dashboard() {
+    navigate("/admin/dashboard")
+  }
+
+  function mycart() {
+    navigate('/cart')
+  }
+
+  function notifications() {
+    navigate('/admin/notifications')
+  }
+
+  const options = [
     { name: 'Orders', funcName: orders },
     { name: 'Profile', funcName: profile },
-    { name: `Cart (${cartItems.length})`, funcName: cart },
-
-    { name: 'Logout', funcName: logoutUser },
   ];
-   if (user?.role === 'admin') {
-  options.unshift({
-    name: 'Admin Dashboard',
-    funcName: dashboard,
-  });
-}
 
-    function dashboard(){
-        navigate("/admin/dashboard")
+  if (user?.role === 'admin') {
+    options.unshift({ name: 'Admin Dashboard', funcName: dashboard });
+    options.push({ name: 'Notifications', funcName: notifications });
+  } else {
+    options.push({ name: `Cart (${cartItems.length})`, funcName: mycart });
+  }
 
-    }
-    function mycart(){
-      navigate('/cart')
-    }
+  options.push({ name: 'Logout', funcName: logoutUser });
 
 
 
 
   return (
     <>
-     
+
       {/* Dashboard Container */}
       <div className="relative z-20 inline-block text-left">
         {/* Profile Header */}
@@ -90,13 +94,12 @@ function UserDashboard({ user }) {
                 onClick={item.funcName}
                 className={`w-full text-left px-4 py-2 border-gray-200 rounded-md transition-colors
                     hover:bg-[#ffee01db] 
-                    ${
-                    item.name === 'Orders' && cartItems.length > 0
-                        ? 'text-black'
-                        : 'text-gray-800'
-                    }
+                    ${item.name === 'Orders' && cartItems.length > 0
+                    ? 'text-black'
+                    : 'text-gray-800'
+                  }
                 `}
-                >
+              >
                 {item.name}
               </button>
             ))}
