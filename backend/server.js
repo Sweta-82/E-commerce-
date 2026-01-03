@@ -1,5 +1,11 @@
-import dotenv, { config } from 'dotenv';
-dotenv.config({ path: './config/config.env' })
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.join(__dirname, 'config', 'config.env') });
 import app from './app.js';
 import { connectMongoDB } from './config/db.js';
 import { v2 as cloudinary } from 'cloudinary';

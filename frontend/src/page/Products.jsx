@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-// import PageTitle from '../components/pageTitle';
+import PageTitle from '../components/PageTitle';
 import Navbar from '../components/Navbar';
 import { useDispatch, useSelector } from 'react-redux';
 import Product from '../components/Product';
-import { getProduct } from '../features/products/productSlice';
+import { getProduct, removeErrors } from '../features/products/productSlice';
 import Loader from '../components/Loader';
 import Pagination from '../components/Pagination';
 import { useNavigate } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Products() {
   const { loading, error, products, resultsPerPage, productCount } = useSelector((state) => state.product);

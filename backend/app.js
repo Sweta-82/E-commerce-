@@ -13,6 +13,18 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(fileUpload({ useTempFiles: true }))
+
+app.get("/test", (req, res) => {
+    res.json({
+        message: "Backend is working",
+        port: process.env.PORT || "Not Set",
+        razorpayKeyExits: !!process.env.RAZORPAY_API_KEY,
+        razorpaySecretExits: !!process.env.RAZORPAY_API_SECRET,
+        dbUrlExists: !!process.env.DB_URL,
+        cloudinaryNameExists: !!process.env.CLOUDINARY_NAME
+    });
+});
+
 // Route
 
 app.use("/api/v1", product)
