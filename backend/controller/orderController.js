@@ -88,6 +88,7 @@ export const updateOrderStatus = handleAsyncError(async (req, res, next) => {
     if (order.orderStatus === 'Delivered') {
         order.deliveredAt = Date.now();
     }
+    await order.save({ validateBeforeSave: false });
     res.status(200).json({
         success: true,
         order
@@ -111,3 +112,9 @@ export const getAdminProductOrders = handleAsyncError(async (req, res, next) => 
         orders
     });
 });
+
+async function updateQuantity(id, quantity) {
+    const product = await Product.findById(id);
+    product.stock -= quantity;
+    await product.save({ validateBeforeSave: false })
+}
