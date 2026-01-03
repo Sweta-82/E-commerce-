@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Button from '../components/Button';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeErrors, removeSuccess, resetPassword } from '../features/user/userSlice';
@@ -39,7 +40,7 @@ function ResetPassword() {
 
   return (
     <>
-      <PageTitle title={'Update Password'}/>
+      <PageTitle title={'Update Password'} />
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
         <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
           <h2 className="text-2xl font-bold text-center mb-6">Reset Password</h2>
@@ -66,12 +67,11 @@ function ResetPassword() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            <button
+            <Button
               type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200"
-            >
-              {loading ? "Resetting..." : "Reset Password"}
-            </button>
+              text={loading ? "Resetting..." : "Reset Password"}
+              className="w-full"
+            />
           </form>
         </div>
       </div>

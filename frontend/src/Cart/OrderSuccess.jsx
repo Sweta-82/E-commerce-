@@ -26,7 +26,7 @@ function OrderSuccess() {
 
                     <Link
                         to="/orders/user"
-                        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition duration-300 shadow-md transform hover:scale-105"
+                        className="bg-black hover:bg-gray-800 text-white font-semibold py-3 px-8 rounded-full transition duration-300 shadow-md transform hover:scale-105"
                     >
                         View Orders
                     </Link>

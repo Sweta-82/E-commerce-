@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Button from '../components/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
@@ -112,19 +113,18 @@ function Register() {
               name="avatar"
               accept="image/*"
               onChange={registerDataChange}
-              className="w-full px-4 py-1 border-1 border-gray-400 rounded-lg file:mr-4 file:py-1 file:px-4 file:bg-gray-100 file:rounded-lg file:text-sm file:border-black  transition mb-"/>
+              className="w-full px-4 py-1 border-1 border-gray-400 rounded-lg file:mr-4 file:py-1 file:px-4 file:bg-gray-100 file:rounded-lg file:text-sm file:border-black  transition mb-" />
             <img
               src={avatarPreview}
               alt="Avatar Preview"
               className="w-12 h-12 rounded-full object-cover border border-gray-300"
             />
           </div>
-          <button
+          <Button
             type="submit"
-            className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition duration-200"
-          >
-            {loading ? 'Signing Up...' : 'Sign Up'}
-          </button>
+            text={loading ? 'Signing Up...' : 'Sign Up'}
+            className="w-full"
+          />
           <p className="text-center text-sm mt-2">
             Already have an account?{' '}
             <Link to="/login" className="text-blue-600 hover:underline">

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaArrowRight } from "react-icons/fa";
+import Button from './Button';
 
 const CategorySection = () => {
     const CardsInfo = [
@@ -36,12 +36,10 @@ const CategorySection = () => {
             <div className='sm:w-1/4 h-full flex flex-col justify-center p-10  text-center'>
                 <p className='text-4xl font-bold  '>Something New From Fashion</p>
                 <p className='font-extralight text-sm text-gray-600 mt-4'>We believe in making clothes that celebrate the people who wear them.</p>
-                <button className="hidden sm:block border border-black hover:bg-black mt-8 px-5 py-1 group relative overflow-hidden transition-all duration-300">
-                    <span className="inline-block transform transition-transform duration-500 group-hover:-translate-x-2 text-black font-bold group-hover:text-white flex items-center gap-2">
-                        See All
-                        <FaArrowRight className="inline-block ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    </span>
-                </button>
+                <Button
+                    text="See All"
+                    className="hidden sm:block border-black hover:bg-black mt-8 px-5 py-1 text-black hover:text-white"
+                />
             </div>
 
 
@@ -62,12 +60,10 @@ const CategorySection = () => {
                                 />
                             }
 
-                            <button className="bottom-2 left-2 absolute border border-black hover:bg-black text-white px-5 py-1 group overflow-hidden">
-                                <span className="inline-block transform transition-transform duration-500 group-hover:-translate-x-2">
-                                    Discover
-                                    <FaArrowRight className="inline-block ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                </span>
-                            </button>
+                            <Button
+                                text="Discover"
+                                className="bottom-2 left-2 absolute border-black hover:bg-black text-white px-5 py-1 !mt-0"
+                            />
                         </div>
 
                         <p className='font-bold mt-2'>{e.title}</p>

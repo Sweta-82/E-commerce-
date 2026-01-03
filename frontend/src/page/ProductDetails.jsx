@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { IoBagAdd } from "react-icons/io5";
+import { FaEdit } from "react-icons/fa";
+import Button from '../components/Button';
 import Navbar from '../components/Navbar';
 import Rating from '../components/Rating';
 import Footer from '../components/Footer';
@@ -184,18 +187,18 @@ function ProductDetails() {
                       <button className="bg-gray-200 px-3 py-1 rounded" onClick={increaseQuantity}>+</button>
                     </div>
 
-                    <button
-                      className="mt-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded shadow"
+                    <Button
+                      text={cartLoading ? 'Adding...' : 'Add to Cart'}
+                      Icon={IoBagAdd}
+                      className="mt-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded shadow border-none"
                       onClick={addToCart}
                       disabled={cartLoading}
-                    >
-                      {cartLoading ? 'Adding...' : 'Add to Cart'}
-                    </button>
+                    />
                   </>
                 ) : (
                   <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm mt-6">
                     <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-2">
-                      <div className="bg-blue-100 p-2 rounded-lg text-blue-600">
+                      <div className="bg-black p-2 rounded-lg text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd" />
                         </svg>
@@ -210,7 +213,7 @@ function ProductDetails() {
                           <p className="font-mono text-gray-800 font-semibold truncate" title={product._id}>{product._id}</p>
                           <button
                             onClick={handleCopyId}
-                            className="text-gray-400 hover:text-blue-600 transition-colors p-1 rounded hover:bg-blue-50"
+                            className="text-gray-400 hover:text-black transition-colors p-1 rounded hover:bg-gray-100"
                             title="Copy ID"
                           >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -233,15 +236,12 @@ function ProductDetails() {
                       </div>
                     </div>
 
-                    <button
+                    <Button
+                      text="Edit Product Details"
+                      Icon={FaEdit}
                       onClick={() => navigate(`/admin/product/${product._id}`)}
-                      className="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold py-3 px-4 rounded-lg transition-all shadow-blue-200 shadow-lg flex items-center justify-center gap-2 group"
-                    >
-                      <span>Edit Product Details</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    </button>
+                      className="w-full bg-black hover:bg-gray-800 text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:shadow-lg border-none"
+                    />
                   </div>
                 )}
               </>
@@ -266,12 +266,11 @@ function ProductDetails() {
                 required
                 onChange={(e) => setComment(e.target.value)}
               ></textarea>
-              <button
+              <Button
                 type="submit"
-                className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-6 rounded shadow-md transition"
-              >
-                Submit Review
-              </button>
+                text="Submit Review"
+                className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-6 rounded shadow-md transition border-none"
+              />
             </form>
 
             <div className="mt-8 bg-white shadow-md rounded-lg p-6">

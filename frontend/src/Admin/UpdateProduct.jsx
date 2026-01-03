@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Button from '../components/Button';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import PageTitle from '../components/PageTitle';
@@ -212,13 +213,12 @@ function UpdateProduct() {
                         ))}
                     </div>
 
-                    <button
+                    <Button
                         type="submit"
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition font-bold"
+                        className="w-full"
                         disabled={loading}
-                    >
-                        {loading ? 'Updating Product...' : "Update Product"}
-                    </button>
+                        text={loading ? 'Updating Product...' : "Update Product"}
+                    />
                 </form>
             </div>
 

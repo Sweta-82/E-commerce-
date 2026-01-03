@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Button from '../components/Button'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import { useDispatch, useSelector } from 'react-redux'
@@ -98,9 +99,9 @@ function UpdatedProfile() {
               onChange={(e) => setEmail(e.target.value)}
             />
 
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-              Update
-            </button>
+            <Button
+              text="Update"
+            />
           </div>
         </form>
 

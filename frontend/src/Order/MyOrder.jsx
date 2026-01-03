@@ -33,7 +33,7 @@ function MyOrders() {
                     <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">My Orders</h1>
                     <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
                         <table className="min-w-full table-auto text-sm text-left">
-                            <thead className="bg-blue-600 text-white">
+                            <thead className="bg-black text-white">
                                 <tr>
                                     <th className="px-6 py-3">Order ID</th>
                                     <th className="px-6 py-3">Items Count</th>
@@ -52,7 +52,7 @@ function MyOrders() {
                                         <td className="px-6 py-4 text-center">
                                             <Link
                                                 to={`/order/${order._id}`}
-                                                className="text-blue-600 hover:text-blue-800 transition"
+                                                className="text-black hover:text-gray-700 transition"
                                             >
                                                 <MdLaunch />
                                             </Link>

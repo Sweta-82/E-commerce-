@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { FaPlus } from 'react-icons/fa';
+import Button from '../components/Button';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import PageTitle from '../components/PageTitle';
@@ -186,12 +188,13 @@ function CreateProduct() {
             ))}
           </div>
 
-          <button
+          <Button
             type="submit"
-            className="w-full bg-gray-900 text-white py-2 rounded-lg hover:bg-blue-700 transition"
-          >
-            {loading ? 'Creating Product...' : "Create"}
-          </button>
+            className="w-full bg-black hover:bg-gray-800 text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:shadow-lg border-none"
+            disabled={loading}
+            Icon={FaPlus}
+            text={loading ? 'Creating Product...' : "Create"}
+          />
         </form>
       </div>
 

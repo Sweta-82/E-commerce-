@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Button from "../components/Button";
 import PageTitle from "../components/PageTitle";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -165,7 +166,7 @@ function Payment() {
             <div
               className={`flex items-center p-4 border rounded-xl cursor-pointer transition-all duration-200 ${paymentMethod === "COD"
                 ? "border-blue-600 bg-blue-50 ring-2 ring-blue-100"
-                : "border-gray-200 hover:border-blue-300"
+                : "border-gray-200 hover:border-black"
                 }`}
               onClick={() => setPaymentMethod("COD")}
             >
@@ -186,7 +187,7 @@ function Payment() {
             <div
               className={`flex items-center p-4 border rounded-xl cursor-pointer transition-all duration-200 ${paymentMethod === "Card"
                 ? "border-blue-600 bg-blue-50 ring-2 ring-blue-100"
-                : "border-gray-200 hover:border-blue-300"
+                : "border-gray-200 hover:border-black"
                 }`}
               onClick={() => setPaymentMethod("Card")}
             >
@@ -204,14 +205,13 @@ function Payment() {
             </div>
           </div>
 
-          <button
+          <Button
             onClick={submitHandler}
             disabled={loading}
-            className={`w-full text-white font-semibold py-3 px-6 rounded-xl transition duration-300 ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+            text={loading ? "Processing..." : `Pay ₹${orderInfo?.total || 0} /-`}
+            className={`w-full text-white font-semibold py-3 px-6 rounded-xl transition duration-300 border-none ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-black hover:bg-gray-800"
               }`}
-          >
-            {loading ? "Processing..." : `Pay ₹${orderInfo?.total || 0} /-`}
-          </button>
+          />
 
           <Link
             to="/order/conform"

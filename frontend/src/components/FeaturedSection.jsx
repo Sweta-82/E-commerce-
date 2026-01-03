@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
+import Button from './Button';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { FaEye, FaArrowRight } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import { IoBagAdd } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 
@@ -77,12 +78,11 @@ const FeaturedSection = () => {
                                     <span key={idx} className='border border-[#121212] px-2 hover:bg-black hover:text-white '>{size}</span>
                                 ))}
                             </div>
-                            <button className=" bg-[#121212] text-white px-10 py-3  group relative overflow-hidden bottom-0 ">
-                                <span className="inline-block transform transition-transform duration-500 group-hover:-translate-x-2">
-                                    Add To Cart
-                                    <IoBagAdd className="inline-block ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                </span>
-                            </button>
+                            <Button
+                                text="Add To Cart"
+                                Icon={IoBagAdd}
+                                className="bg-[#121212] active:text-white px-10 py-3 w-full bottom-0 border-none !mt-0 text-white"
+                            />
                         </div>
                     </Link>
                 ))}
@@ -98,12 +98,10 @@ const FeaturedSection = () => {
                 <div className='w-full md:w-[40%] bg-white flex flex-col justify-center items-center text-center p-8 md:p-12 border border-gray-200'>
                     <p className='uppercase text-xl md:text-2xl font-bold mb-3 md:mb-5'>Big sale</p>
                     <p className='text-lg md:text-xl text-gray-700'>The best collection of the week</p>
-                    <button className="mt-6 border border-black hover:bg-black px-8 py-3 group overflow-hidden transition-all duration-300">
-                        <span className="inline-block text-black group-hover:text-white transform transition-transform duration-500 group-hover:-translate-x-2 flex items-center gap-2">
-                            Shop The Collection
-                            <FaArrowRight className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        </span>
-                    </button>
+                    <Button
+                        text="Shop The Collection"
+                        className="mt-6 border-black hover:bg-black px-8 py-3 text-black hover:text-white"
+                    />
                 </div>
             </div>
         </div>

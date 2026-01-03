@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../components/Button';
 import PageTitle from '../components/PageTitle';
 import Navbar from '../components/Navbar';
 import CheckoutPath from './CheckoutPath';
@@ -11,21 +12,21 @@ function OrderConform() {
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
-    const tax = subtotal * 0.18
-    const shippingCharges = subtotal > 500 ? 0 : 50
-    const total = subtotal + tax + shippingCharges;
-    const navigate = useNavigate();
+  const tax = subtotal * 0.18
+  const shippingCharges = subtotal > 500 ? 0 : 50
+  const total = subtotal + tax + shippingCharges;
+  const navigate = useNavigate();
 
-    const handleProceedToPayment=()=>{
-        const data={
-            subtotal,
-            tax,
-            shippingCharges,
-            total
-        }
-        sessionStorage.setItem('oderItems',JSON.stringify(data))
-        navigate('/process/payment')
+  const handleProceedToPayment = () => {
+    const data = {
+      subtotal,
+      tax,
+      shippingCharges,
+      total
     }
+    sessionStorage.setItem('oderItems', JSON.stringify(data))
+    navigate('/process/payment')
+  }
   return (
     <>
       <PageTitle title={'Order Confirm'} />
@@ -110,12 +111,11 @@ function OrderConform() {
           </table>
         </div>
         <div className="text-center">
-          <button
+          <Button
             onClick={handleProceedToPayment}
-            className="mt-3 px-6 py-3 bg-blue-700 text-white rounded-lg text-lg font-medium hover:bg-blue-800 transition duration-300"
-          >
-            Proceed to Payment
-          </button>
+            text="Proceed to Payment"
+            className="mt-3 px-6 py-3 bg-black text-white rounded-lg text-lg font-medium hover:bg-gray-800 transition duration-300 border-none"
+          />
         </div>
       </div>
 

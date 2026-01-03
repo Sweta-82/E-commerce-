@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Button from "../components/Button";
 import { toast } from "react-toastify";
 import {
   addItemsToCart,
@@ -115,20 +116,18 @@ function CartItem({ item }) {
 
       {/* Actions */}
       <div className="flex flex-col sm:flex-row gap-2">
-        <button
+        <Button
+          text={loading ? "Updating" : "Update"}
           onClick={handleUpdate}
           disabled={loading || quantity === item.quantity}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded disabled:opacity-50"
-        >
-          {loading ? "Updating" : "Update"}
-        </button>
-        <button
+          className="bg-black hover:bg-gray-800 text-white !px-4 !py-1 rounded disabled:opacity-50 !mt-0 border-none"
+        />
+        <Button
+          text="Remove"
           onClick={handleRemove}
           disabled={loading}
-          className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded disabled:opacity-50"
-        >
-          Remove
-        </button>
+          className="bg-red-600 hover:bg-red-700 text-white !px-4 !py-1 rounded disabled:opacity-50 !mt-0 border-none"
+        />
       </div>
     </div>
   );

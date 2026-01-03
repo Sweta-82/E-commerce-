@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Button from '../components/Button';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer'; // Corrected import
 import PageTitle from '../components/PageTitle';
@@ -56,13 +57,12 @@ function ProductReviews() {
                                 value={productId}
                                 onChange={(e) => setProductId(e.target.value)}
                             />
-                            <button
+                            <Button
                                 type="submit"
-                                className="bg-blue-600 text-white px-6 py-3 font-semibold hover:bg-blue-700 transition duration-300 disabled:opacity-50"
+                                text="Search"
+                                className="!mt-0 rounded-none h-full"
                                 disabled={loading || productId === ''}
-                            >
-                                Search
-                            </button>
+                            />
                         </form>
                     </div>
 

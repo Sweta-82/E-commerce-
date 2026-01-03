@@ -60,7 +60,7 @@ function Products() {
                 {categories.map((cat) => (
                   <button
                     key={cat}
-                    className={`p-2 rounded text-left ${category === cat ? "bg-blue-500 text-white" : "bg-gray-100 hover:bg-blue-100 text-gray-800"}`}
+                    className={`p-2 rounded text-left ${category === cat ? "bg-black text-white" : "bg-gray-100 hover:bg-gray-200 text-gray-800"}`}
                     onClick={() => setCategory(cat)}
                   >
                     {cat}

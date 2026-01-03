@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../components/Button'
 import PageTitle from '../components/PageTitle'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -28,7 +29,7 @@ function Cart() {
                     <p className="text-xl font-semibold text-gray-700 mb-4">Your cart is empty</p>
                     <Link
                         to="/products"
-                        className="text-white bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-md transition"
+                        className="text-white bg-black hover:bg-gray-800 px-5 py-2 rounded-md transition"
                     >
                         View Products
                     </Link>
@@ -73,12 +74,11 @@ function Cart() {
                                 <span>₹{total.toFixed(2)}</span>
                             </div>
                         </div>
-                        <button
+                        <Button
                             onClick={checkoutHandler}
-                            className="w-full mt-6 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-md transition"
-                        >
-                            Proceed to Checkout
-                        </button>
+                            text="Proceed to Checkout"
+                            className="w-full mt-6 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-md transition border-none"
+                        />
                     </div>
                 </div>
             )}

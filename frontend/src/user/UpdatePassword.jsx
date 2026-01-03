@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
+import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePassword, removeErrors, removeSuccess } from "../features/user/userSlice";
 import { toast } from "react-toastify";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import PageTitle from "../components/pageTitle";
+import PageTitle from "../components/PageTitle";
 
 function UpdatePassword() {
   const { success, loading, error } = useSelector((state) => state.user);
@@ -83,12 +84,11 @@ function UpdatePassword() {
               />
             </div>
 
-            <button
+            <Button
               type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200"
-            >
-              Update Password
-            </button>
+              text="Update Password"
+              className="w-full"
+            />
           </form>
         </div>
       </div>

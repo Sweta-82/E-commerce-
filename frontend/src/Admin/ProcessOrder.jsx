@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import Loader from '../components/Loader';
 import { FaShippingFast, FaMapMarkerAlt, FaPhoneAlt, FaUser, FaBoxOpen, FaClipboardList, FaCheckCircle } from 'react-icons/fa';
 import { MdPayment, MdAttachMoney } from 'react-icons/md';
+import Button from '../components/Button';
 
 function ProcessOrder() {
     const { order, error, loading } = useSelector((state) => state.order);
@@ -164,7 +165,7 @@ function ProcessOrder() {
                                                 <div className="flex items-center gap-4">
                                                     <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded-md border border-gray-200" />
                                                     <div>
-                                                        <Link to={`/product/${item.product}`} className="font-semibold text-gray-800 hover:text-blue-600 transition-colors line-clamp-1">{item.name}</Link>
+                                                        <Link to={`/product/${item.product}`} className="font-semibold text-gray-800 hover:text-black transition-colors line-clamp-1">{item.name}</Link>
                                                         <p className="text-sm text-gray-500">Price: ₹{item.price}</p>
                                                     </div>
                                                 </div>
@@ -205,16 +206,13 @@ function ProcessOrder() {
                                             </div>
                                         </div>
 
-                                        <button
+                                        <Button
+                                            text={updateLoading ? 'Processing...' : 'Update Status'}
                                             type="submit"
+                                            Icon={FaCheckCircle}
                                             disabled={loading || status === "" || updateLoading}
-                                            className={`w-full py-4 px-6 rounded-lg text-white font-bold text-lg shadow-md hover:shadow-lg transform transition hover:-translate-y-1 focus:ring-4 focus:ring-purple-300 ${loading || status === "" || updateLoading
-                                                    ? "bg-gray-400 cursor-not-allowed"
-                                                    : "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-                                                }`}
-                                        >
-                                            {updateLoading ? 'Processing...' : 'Update Status'}
-                                        </button>
+                                            className={`w-full ${loading || status === "" || updateLoading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+                                        />
 
                                         <div className="mt-4 pt-4 border-t border-gray-100">
                                             <p className="text-xs text-gray-400 text-center">

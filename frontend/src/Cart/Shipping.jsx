@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "../components/Button";
 import PageTitle from "../components/PageTitle";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -145,12 +146,11 @@ function Shipping() {
               )}
             </div>
 
-            <button
+            <Button
               type="submit"
-              className="w-full bg-blue-700 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-800 transition duration-300"
-            >
-              Continue
-            </button>
+              text="Continue"
+              className="w-full bg-black text-white py-3 rounded-lg text-lg font-semibold hover:bg-gray-800 transition duration-300 border-none"
+            />
           </form>
         </div>
       </div>

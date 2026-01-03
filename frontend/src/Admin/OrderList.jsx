@@ -94,10 +94,13 @@ function OrderList() {
                                             <td className="px-4 py-4 text-sm text-gray-500">{new Date(order.createAt).toLocaleDateString()}</td>
                                             <td className="px-4 py-4 text-sm space-x-2 flex">
                                                 {/* Edit Order Link */}
+                                                {/* Edit Order Link */}
                                                 <Link to={`/admin/order/${order._id}`}>
-                                                    <FaEdit className="text-blue-500 hover:text-blue-700" />
+                                                    <button className="text-black hover:text-gray-700 bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition-colors" title="Edit">
+                                                        <FaEdit />
+                                                    </button>
                                                 </Link>
-                                                <button onClick={() => handleDelete(order._id)} className="text-red-500 hover:text-red-700">
+                                                <button onClick={() => handleDelete(order._id)} className="text-red-600 hover:text-red-900 bg-red-50 p-2 rounded-lg hover:bg-red-100 transition-colors" title="Delete">
                                                     <FaTrash />
                                                 </button>
                                             </td>

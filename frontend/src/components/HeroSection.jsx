@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaArrowRight } from "react-icons/fa";
+import Button from './Button';
 
 const HeroSection = () => {
     return (
@@ -12,12 +12,10 @@ const HeroSection = () => {
                 <h1 className='  text-[8vw] font-bold tracking-tighter sm:leading-[12vw] whitespace-normal leading-[8vw]'>Spring summer collection</h1>
                 <h1 className=' text-2xl pt-10 '>Finest Wrinkle Free Collection</h1>
                 <h1 className='pt-2 leading-3 text-sm tracking-tight'>Oversize fit collared shirt. Long sleeves with buttoned cuffs. Chest patch pocket.</h1>
-                <button className="uppercase bg-white text-black mt-8 px-10 py-3 hover:bg-gray-200 group relative overflow-hidden">
-                    <span className="inline-block transform transition-transform duration-500 group-hover:-translate-x-2">
-                        Shop Now
-                        <FaArrowRight className="inline-block ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    </span>
-                </button>
+                <Button
+                    text="Shop Now"
+                    className="mt-8 bg-white hover:!text-white hover:!bg-black px-10 py-3 text-black border-none"
+                />
             </div>
 
         </div>

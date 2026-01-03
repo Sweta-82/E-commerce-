@@ -108,7 +108,7 @@ function UserList() {
                                                 </span>
                                             </td>
                                             <td className="px-4 py-4 text-sm space-x-2 flex">
-                                                <button onClick={() => handleDelete(user._id)} className="text-red-500 hover:text-red-700">
+                                                <button onClick={() => handleDelete(user._id)} className="text-red-600 hover:text-red-900 bg-red-50 p-2 rounded-lg hover:bg-red-100 transition-colors" title="Delete">
                                                     <FaTrash />
                                                 </button>
                                             </td>

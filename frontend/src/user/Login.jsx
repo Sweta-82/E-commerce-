@@ -1,5 +1,6 @@
 // Login.jsx
 import React, { useState } from "react";
+import Button from "../components/Button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../features/user/userSlice";
@@ -9,35 +10,35 @@ import { removeErrors, removeSuccess } from "../features/user/userSlice";
 function Login() {
   const [Useremail, setUserEmail] = useState("");
   const [Userpassword, setUserPassword] = useState("");
-  const {error,loading,success,isAuthenticated}=useSelector(state=>state.user);
-  const dispatch=useDispatch();
-  const navigate=useNavigate()
-  const location=useLocation()
-  const redirect=new URLSearchParams(location.search).get("redirect")||"/"
+  const { error, loading, success, isAuthenticated } = useSelector(state => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const location = useLocation()
+  const redirect = new URLSearchParams(location.search).get("redirect") || "/"
   const handleLogin = (e) => {
     e.preventDefault();
     // console.log("Email:", email);
     // console.log("Password:", password);
-    dispatch(login({email:Useremail, password:Userpassword}))
+    dispatch(login({ email: Useremail, password: Userpassword }))
   };
-  useEffect(()=>{
-            if(error){
-              toast.error(error,{position:'top-center',autoClose:3000});
-              dispatch(removeErrors())
-            }
-          },[dispatch,error])
+  useEffect(() => {
+    if (error) {
+      toast.error(error, { position: 'top-center', autoClose: 3000 });
+      dispatch(removeErrors())
+    }
+  }, [dispatch, error])
 
-   useEffect(()=>{
-    if(isAuthenticated){
-        navigate(redirect)
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(redirect)
     }
-   },[isAuthenticated])
-   useEffect(()=>{
-    if(success){
-        toast.success('Login Successful',{position:'top-center',autoClose:3000})
-        dispatch(removeSuccess())
+  }, [isAuthenticated])
+  useEffect(() => {
+    if (success) {
+      toast.success('Login Successful', { position: 'top-center', autoClose: 3000 })
+      dispatch(removeSuccess())
     }
-   },[dispatch,success])
+  }, [dispatch, success])
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -74,12 +75,11 @@ function Login() {
             </Link>
           </div>
 
-          <button
+          <Button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200"
-          >
-            Sign In
-          </button>
+            text="Sign In"
+            className="w-full"
+          />
         </form>
 
         <p className="mt-6 text-center text-sm text-gray-600">

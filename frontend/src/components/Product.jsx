@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Rating from './Rating';
+import Button from './Button';
 
 function Product({ product }) {
   const [rating, setRating] = useState(0);
@@ -40,9 +41,10 @@ function Product({ product }) {
           </div>
           <div className="flex items-center justify-between mt-auto">
             <span className="text-gray-800 font-bold text-lg">₹ {product.price}</span>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-1.5 rounded">
-              View Details
-            </button>
+            <Button
+              text="View Details"
+              className="bg-black hover:bg-gray-800 text-white text-sm px-4 py-1.5 rounded border-none !mt-0"
+            />
           </div>
         </div>
       </div>

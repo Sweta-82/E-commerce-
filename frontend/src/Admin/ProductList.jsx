@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import Button from '../components/Button';
+import { FaPlus } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import PageTitle from '../components/PageTitle';
@@ -50,9 +52,11 @@ function ProductList() {
             <div className="flex justify-between items-center p-6 bg-white border-b border-gray-100">
               <h1 className="text-2xl font-bold text-gray-800">All Products</h1>
               <Link to="/admin/products/create">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-lg transition-all shadow-md hover:shadow-lg flex items-center gap-2">
-                  <span>+</span> Create Product
-                </button>
+                <Button
+                  text="Create Product"
+                  Icon={FaPlus}
+                  className="bg-black hover:bg-gray-800 text-white font-semibold py-2 px-5 rounded-lg shadow-md hover:shadow-lg border-none !mt-0"
+                />
               </Link>
             </div>
 
@@ -98,7 +102,7 @@ function ProductList() {
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex items-center gap-3">
                           <Link to={`/admin/product/${product._id}`}>
-                            <button className="text-blue-600 hover:text-blue-900 bg-blue-50 p-2 rounded-lg hover:bg-blue-100 transition-colors" title="Edit">
+                            <button className="text-black hover:text-gray-700 bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition-colors" title="Edit">
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                               </svg>

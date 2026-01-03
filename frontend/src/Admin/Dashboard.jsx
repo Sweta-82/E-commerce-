@@ -52,12 +52,12 @@ function Dashboard() {
                 <p className="text-xs font-bold text-gray-400 uppercase mb-2">Inventory</p>
                 <ul className="space-y-2">
                   <Link to='/admin/products'>
-                    <li className='flex items-center gap-3 text-gray-700 hover:text-blue-600 transition-colors p-2 rounded hover:bg-blue-50 cursor-pointer'>
+                    <li className='flex items-center gap-3 text-gray-700 hover:text-black transition-colors p-2 rounded hover:bg-gray-100 cursor-pointer'>
                       <FaBoxArchive /> All Products
                     </li>
                   </Link>
                   <Link to='/admin/products/create'>
-                    <li className='flex items-center gap-3 text-gray-700 hover:text-blue-600 transition-colors p-2 rounded hover:bg-blue-50 cursor-pointer'>
+                    <li className='flex items-center gap-3 text-gray-700 hover:text-black transition-colors p-2 rounded hover:bg-gray-100 cursor-pointer'>
                       <MdAddBox /> Create Product
                     </li>
                   </Link>
@@ -68,17 +68,17 @@ function Dashboard() {
                 <p className="text-xs font-bold text-gray-400 uppercase mb-2">Management</p>
                 <ul className="space-y-2">
                   <Link to='/admin/users'>
-                    <li className='flex items-center gap-3 text-gray-700 hover:text-blue-600 transition-colors p-2 rounded hover:bg-blue-50 cursor-pointer'>
+                    <li className='flex items-center gap-3 text-gray-700 hover:text-black transition-colors p-2 rounded hover:bg-gray-100 cursor-pointer'>
                       <ImUsers /> Users
                     </li>
                   </Link>
                   <Link to='/admin/orders'>
-                    <li className='flex items-center gap-3 text-gray-700 hover:text-blue-600 transition-colors p-2 rounded hover:bg-blue-50 cursor-pointer'>
+                    <li className='flex items-center gap-3 text-gray-700 hover:text-black transition-colors p-2 rounded hover:bg-gray-100 cursor-pointer'>
                       <FaCartArrowDown /> Orders
                     </li>
                   </Link>
                   <Link to='/admin/reviews'>
-                    <li className='flex items-center gap-3 text-gray-700 hover:text-blue-600 transition-colors p-2 rounded hover:bg-blue-50 cursor-pointer'>
+                    <li className='flex items-center gap-3 text-gray-700 hover:text-black transition-colors p-2 rounded hover:bg-gray-100 cursor-pointer'>
                       <FaStar /> Reviews
                     </li>
                   </Link>
