@@ -77,9 +77,15 @@ function Products() {
                 <p className="text-red-500">{error}</p>
               ) : (
                 <div className="flex flex-wrap gap-6">
-                  {products.map((product) => (
-                    <Product key={product._id} product={product} />
-                  ))}
+                  {products.length === 0 ? (
+                    <div className="w-full text-center py-10">
+                      <h2 className="text-2xl font-bold text-gray-500">No Product Found</h2>
+                    </div>
+                  ) : (
+                    products.map((product) => (
+                      <Product key={product._id} product={product} />
+                    ))
+                  )}
                 </div>
               )}
             </div>

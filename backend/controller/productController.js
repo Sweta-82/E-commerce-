@@ -75,19 +75,25 @@ export const createProducts = handleAsyncError(async (req, res, next) => {
 // get all products
 
 export const getAllProducts = handleAsyncError(async (req, res, next) => {
-    //simplified version
-    console.log("getAllProducts simplified called");
-    const products = await Product.find();
-    console.log("getAllProducts simplified fetched:", products.length);
+    const resultPerPage = 8;
+    const productsCount = await Product.countDocuments();
+
+    const apiFeature = new APIFunctionality(Product.find(), req.query)
+        .search()
+        .filter()
+        .pagination(resultPerPage);
+
+    const products = await apiFeature.query;
+    const filteredProductsCount = products.length;
+
     res.status(200).json({
         success: true,
         products,
-        productCount: products.length,
-        resultsPerPage: products.length,
-        totalPages: 1,
-        currentPage: 1,
-    });
-});
+        productsCount,
+        resultPerPage,
+        filteredProductsCount
+    })
+})
 /*
 export const getAllProducts = handleAsyncError(async (req, res, next) => {
     console.log("getAllProducts called"); // Debug log
