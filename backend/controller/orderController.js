@@ -9,9 +9,9 @@ import APIFunctionality from '../utils/apiFunctionality.js';
 // create new order
 export const createNewOrder = handleAsyncError(async (req, res, next) => {
     // Restrict Admin from placing orders
-    if (req.user && req.user.role === 'admin') {
-        return next(new HandleError("Admins cannot place orders.", 403));
-    }
+    // if (req.user && req.user.role === 'admin') {
+    //     return next(new HandleError("Admins cannot place orders.", 403));
+    // }
 
     const { shippingInfo, orderItems, paymentInfo, user, paidAt, itemPrice, taxPrice, shippingPrice, totalPrice } = req.body;
     const order = await Order.create({
@@ -94,3 +94,20 @@ export const updateOrderStatus = handleAsyncError(async (req, res, next) => {
     })
 })
 
+// get orders for products created by the specific admin
+export const getAdminProductOrders = handleAsyncError(async (req, res, next) => {
+    // 1. Find all products created by this user (admin)
+    const products = await Product.find({ user: req.user._id });
+    const productIds = products.map(product => product._id);
+
+    // 2. Find all orders that contain any of these products
+    const orders = await Order.find({
+        "orderItems.product": { $in: productIds }
+    });
+
+    res.status(200).json({
+        success: true,
+        count: orders.length,
+        orders
+    });
+});

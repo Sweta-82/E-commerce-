@@ -4,10 +4,6 @@ import HandleError from "../utils/handleError.js";
 
 // Process Payment
 export const processPayment = handleAsyncError(async (req, res, next) => {
-    console.log("Processing Payment...");
-    console.log("Key ID Exists:", !!process.env.RAZORPAY_API_KEY);
-    console.log("Key Secret Exists:", !!process.env.RAZORPAY_API_SECRET);
-    console.log("Request Body:", req.body);
 
     // check if keys are available
     if (!process.env.RAZORPAY_API_KEY || !process.env.RAZORPAY_API_SECRET) {

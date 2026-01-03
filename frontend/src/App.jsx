@@ -18,52 +18,54 @@ import Cart from './Cart/Cart'
 import Shipping from './Cart/Shipping'
 import OrderConform from './Cart/OrderConform'
 import Payment from './Cart/Payment'
+import OrderSuccess from './Cart/OrderSuccess'
 import MyOrder from './Order/MyOrder'
 import Dashboard from './Admin/Dashboard'
 import ProductList from './Admin/ProductList'
 import CreateProduct from './Admin/CreateProduct'
 function App() {
-  const {isAuthenticated, user}=useSelector(state=>state.user);
-  const dispatch=useDispatch()
+  const { isAuthenticated, user } = useSelector(state => state.user);
+  const dispatch = useDispatch()
 
-  useEffect(()=>{
-    if(isAuthenticated){
-    dispatch(loadUser())
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(loadUser())
     }
-  },[dispatch])
-  console.log(isAuthenticated,user);
-  
+  }, [dispatch])
+  console.log(isAuthenticated, user);
+
   return (
     <>
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/product/:id" element={<ProductDetails/>}/>
-        <Route path="/products" element={<Products/>}/>
-        <Route path="/register" element={<Register/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/profile" element={<Profile/>}/>
-        <Route path="/profile/update" element={<UpdatedProfile/>}/>
-        {/* {isAuthenticated && <UpdatePassword user={user}/>} */}
-        <Route path="/password/update" element={<UpdatePassword/>}/>
-        <Route path="/password/forgot" element={<ForgotPassword/>}/>
-        <Route path="/reset/:token" element={<ResetPassword/>}/>
-        <Route path="/cart" element={<Cart/>}/>
-        <Route path="/shipping" element={<Shipping/>}/>
-        <Route path="/order/conform" element={<OrderConform/>}/>
-        <Route path="/process/payment" element={<Payment/>}/>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/update" element={<UpdatedProfile />} />
+          {/* {isAuthenticated && <UpdatePassword user={user}/>} */}
+          <Route path="/password/update" element={<UpdatePassword />} />
+          <Route path="/password/forgot" element={<ForgotPassword />} />
+          <Route path="/reset/:token" element={<ResetPassword />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/shipping" element={<Shipping />} />
+          <Route path="/order/conform" element={<OrderConform />} />
+          <Route path="/process/payment" element={<Payment />} />
+          <Route path="/success" element={<OrderSuccess />} />
 
-        {/* admin  */}
-        <Route path="/admin/dashboard" element={<Dashboard/>} adminOnly={true}/>
-        <Route path="/orders/user" element={<MyOrder/>}/>
-        <Route path="/admin/products" element={<ProductList/>}/>
-        <Route path="/admin/products/create" element={<CreateProduct/>}/>
+          {/* admin  */}
+          <Route path="/admin/dashboard" element={<Dashboard />} adminOnly={true} />
+          <Route path="/orders/user" element={<MyOrder />} />
+          <Route path="/admin/products" element={<ProductList />} />
+          <Route path="/admin/products/create" element={<CreateProduct />} />
 
 
-      </Routes>
-      {/* {isAuthenticated && <Userdashboard user={user}/>} */}
-      {/* {<UserDashboard user={user}/>} */}
-    </Router>
+        </Routes>
+        {/* {isAuthenticated && <Userdashboard user={user}/>} */}
+        {/* {<UserDashboard user={user}/>} */}
+      </Router>
     </>
   )
 }

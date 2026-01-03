@@ -68,8 +68,9 @@ function Payment() {
         };
 
         await axios.post("/api/v1/new/order", order, config);
+        setLoading(false);
         toast.success("Order Placed Successfully!");
-        navigate("/orders/user"); // Redirect to orders page or success page
+        navigate("/success");
       } else {
         // Online Payment (Razorpay)
         const res = await loadRazorpay();
@@ -95,14 +96,21 @@ function Payment() {
           image: "https://example.com/your_logo",
           order_id: razorpayOrder.id,
           handler: async function (response) {
-            order.paymentInfo = {
-              id: response.razorpay_payment_id,
-              status: "succeeded",
-            };
+            try {
+              order.paymentInfo = {
+                id: response.razorpay_payment_id,
+                status: "succeeded",
+              };
 
-            await axios.post("/api/v1/new/order", order, config);
-            toast.success("Payment Succeeded & Order Placed!");
-            navigate("/orders/user");
+              await axios.post("/api/v1/new/order", order, config);
+              setLoading(false);
+              toast.success("Payment Succeeded & Order Placed!");
+              navigate("/success");
+            } catch (error) {
+              setLoading(false);
+              toast.error("Order creation failed after payment. Please contact support.");
+              console.error(error);
+            }
           },
           prefill: {
             name: user.name,
