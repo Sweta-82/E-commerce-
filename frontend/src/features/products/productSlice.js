@@ -45,6 +45,25 @@ export const createReview = createAsyncThunk('product/createReview', async ({ ra
         return rejectWithValue(error.response?.data || 'An error occurred')
     }
 })
+export const getAllReviews = createAsyncThunk('product/getAllReviews', async (id, { rejectWithValue }) => {
+    try {
+        const { data } = await axios.get(`/api/v1/reviews?id=${id}`);
+        return data;
+    } catch (error) {
+        return rejectWithValue(error.response?.data || 'An error occurred')
+    }
+})
+
+export const deleteReviews = createAsyncThunk('product/deleteReviews', async ({ reviewId, productId }, { rejectWithValue }) => {
+    try {
+        // Correct query parameters: id for reviewId, productId for product
+        const { data } = await axios.delete(`/api/v1/reviews?id=${reviewId}&productId=${productId}`);
+        return data;
+    } catch (error) {
+        return rejectWithValue(error.response?.data || 'An error occurred')
+    }
+})
+
 const productSlice = createSlice({
     name: 'product',
     initialState: {
@@ -56,7 +75,9 @@ const productSlice = createSlice({
         resultsPerPage: 0,
         totalPages: 1,
         reviewSuccess: false,
-        reviewLoading: false
+        reviewLoading: false,
+        reviews: [], // Array to store fetched reviews
+        isDeleted: false, // For review deletion success
     },
 
     // if any error we can assign null
@@ -65,7 +86,8 @@ const productSlice = createSlice({
             state.error = null
         },
         removeSuccess: (state) => {
-            state.reviewSuccess = false
+            state.reviewSuccess = false;
+            state.isDeleted = false;
         },
     },
 
@@ -123,8 +145,34 @@ const productSlice = createSlice({
             .addCase(createReview.rejected, (state, action) => {
                 state.reviewLoading = false;
                 state.error = action.payload || 'Something went wrong'
+            })
 
+        // Get All Reviews
+        builder.addCase(getAllReviews.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+            .addCase(getAllReviews.fulfilled, (state, action) => {
+                state.loading = false;
+                state.reviews = action.payload.reviews;
+            })
+            .addCase(getAllReviews.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload || 'Failed to fetch reviews';
+            })
 
+        // Delete Review
+        builder.addCase(deleteReviews.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+            .addCase(deleteReviews.fulfilled, (state, action) => {
+                state.loading = false;
+                state.isDeleted = action.payload.success;
+            })
+            .addCase(deleteReviews.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload || 'Failed to delete review';
             })
 
     }

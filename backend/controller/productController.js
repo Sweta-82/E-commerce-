@@ -256,9 +256,22 @@ export const deleteReview = handleAsyncError(async (req, res, next) => {
 
 // getting all product for admin
 export const getAdminProducts = handleAsyncError(async (req, res, next) => {
-    const products = await Product.find();
+    const resultPerPage = 8;
+    const productsCount = await Product.countDocuments();
+
+    const apiFeature = new APIFunctionality(Product.find(), req.query)
+        .search()
+        .filter()
+        .pagination(resultPerPage);
+
+    const products = await apiFeature.query;
+    const filteredProductsCount = products.length;
+
     res.status(200).json({
         success: true,
-        products
+        products,
+        productsCount,
+        resultPerPage,
+        filteredProductsCount
     })
 })

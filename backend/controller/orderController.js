@@ -64,8 +64,6 @@ export const getAllMyOrder = handleAsyncError(async (req, res, next) => {
     const ordersCount = await Order.countDocuments();
 
     const apiFeature = new APIFunctionality(Order.find(), req.query)
-        .search()
-        .filter()
         .pagination(resultPerPage);
 
     const orders = await apiFeature.query;
