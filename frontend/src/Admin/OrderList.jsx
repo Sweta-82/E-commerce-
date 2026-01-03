@@ -67,7 +67,7 @@ function OrderList() {
                     ) : (
                         <div className="overflow-x-auto">
                             <table className="min-w-full divide-y divide-gray-200 border border-[#fff001]">
-                                <thead className="bg-[#fff001] text-black">
+                                <thead className="bg-black text-white">
                                     <tr>
                                         <th className="px-4 py-3 text-left text-sm font-semibold uppercase tracking-wider">Order ID</th>
                                         <th className="px-4 py-3 text-left text-sm font-semibold uppercase tracking-wider">Status</th>

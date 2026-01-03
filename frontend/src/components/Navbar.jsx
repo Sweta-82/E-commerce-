@@ -41,7 +41,7 @@ function Navbar() {
   console.log(isAuthenticated, user);
 
   return (
-    <nav className="bg-gray-800 text-white px-8 py-3 ">
+    <nav className="bg-black text-white px-8 py-3 ">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
 
         {/* Left Section: Logo + Links */}
