@@ -23,6 +23,7 @@ function ProductDetails() {
 
   const { loading, error, product, reviewSuccess, reviewLoading } = useSelector((state) => state.product);
   const { error: cartError, success, message } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.user);
 
   const handleRatingChange = (newRating) => {
     setUserRating(newRating);
@@ -162,25 +163,33 @@ function ProductDetails() {
 
             {product.stock > 0 && (
               <>
-                <div className="flex items-center gap-4">
-                  <span className="font-medium">Quantity:</span>
-                  <button className="bg-gray-200 px-3 py-1 rounded" onClick={decreaseQuantity}>-</button>
-                  <input
-                    type="text"
-                    value={quantity}
-                    readOnly
-                    className="w-12 text-center border rounded"
-                  />
-                  <button className="bg-gray-200 px-3 py-1 rounded" onClick={increaseQuantity}>+</button>
-                </div>
+                {(!user || user.role !== 'admin') ? (
+                  <>
+                    <div className="flex items-center gap-4">
+                      <span className="font-medium">Quantity:</span>
+                      <button className="bg-gray-200 px-3 py-1 rounded" onClick={decreaseQuantity}>-</button>
+                      <input
+                        type="text"
+                        value={quantity}
+                        readOnly
+                        className="w-12 text-center border rounded"
+                      />
+                      <button className="bg-gray-200 px-3 py-1 rounded" onClick={increaseQuantity}>+</button>
+                    </div>
 
-                <button
-                  className="mt-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded shadow"
-                  onClick={addToCart}
-                  disabled={cartLoading}
-                >
-                  {cartLoading ? 'Adding...' : 'Add to Cart'}
-                </button>
+                    <button
+                      className="mt-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded shadow"
+                      onClick={addToCart}
+                      disabled={cartLoading}
+                    >
+                      {cartLoading ? 'Adding...' : 'Add to Cart'}
+                    </button>
+                  </>
+                ) : (
+                  <p className="mt-4 text-red-500 font-medium border border-red-500 p-2 rounded max-w-max">
+                    Admin accounts cannot place orders.
+                  </p>
+                )}
               </>
             )}
           </div>

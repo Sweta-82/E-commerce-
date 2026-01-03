@@ -1,5 +1,5 @@
 import dotenv, { config } from 'dotenv';
-dotenv.config({path:'backend/config/config.env'})
+dotenv.config({ path: './config/config.env' })
 import app from './app.js';
 import { connectMongoDB } from './config/db.js';
 import { v2 as cloudinary } from 'cloudinary';

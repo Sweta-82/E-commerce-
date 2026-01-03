@@ -10,9 +10,9 @@ function Product({ product }) {
     console.log(`Rating changed to ${newRating}`);
   };
 
-  // Safely get first image URL
-  const productImage = product.images && product.images.length > 0
-    ? product.images[0].url
+  // Safely get first image URL (Backend uses 'image' singular for array)
+  const productImage = product.image && product.image.length > 0
+    ? product.image[0].url
     : '/path/to/default-image.jpg'; // fallback image
 
   return (
@@ -26,7 +26,7 @@ function Product({ product }) {
           />
         </div>
         <div className="flex-1 p-4 flex flex-col justify-between">
-          <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
+          <h3 className="text-lg font-semibold mb-2">{product.title || product.name}</h3>
           <div className="rating flex justify-between">
             <Rating
               value={product.ratings || 0}

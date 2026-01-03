@@ -7,23 +7,25 @@ import { createProduct, removeErrors, removeSuccess } from '../features/admin/ad
 import { toast } from 'react-toastify';
 
 function CreateProduct() {
-  const {success, loading, error}= useSelector(state=>state.admin);
-  const dispatch=useDispatch();
+  const { success, loading, error } = useSelector(state => state.admin);
+  const dispatch = useDispatch();
   const [name, setname] = useState('');
   const [price, setprice] = useState('');
   const [description, setdescription] = useState('');
   const [category, setcategory] = useState('');
   const [stock, setstock] = useState('');
+  const [size, setSize] = useState('');
   const [images, setimages] = useState([]);
   const [imagePreviews, setImagePreviews] = useState([]);
 
   const categories = ['Electronics', 'Clothing', 'Books', 'Grocery'];
+  const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
 
-    setimages([]);        // Clear existing images
-    setImagePreviews([]); // Clear previews
+    setimages([]);        // clear existing images
+    setImagePreviews([]); // clear previews
 
     files.forEach((file) => {
       const reader = new FileReader();
@@ -43,11 +45,12 @@ function CreateProduct() {
     e.preventDefault();
 
     const myForm = new FormData();
-    myForm.set('name', name);
+    myForm.set('title', name);
     myForm.set('price', price);
     myForm.set('description', description);
     myForm.set('category', category);
     myForm.set('stock', stock);
+    myForm.set('size', size);
 
     images.forEach((img) => {
       myForm.append('images', img); // key name must match backend
@@ -58,28 +61,30 @@ function CreateProduct() {
 
     // Send myForm to backend or dispatch Redux action
     console.log('Submitting product:', {
-      name, price, description, category, stock, images
+      name, price, description, category, stock, size, images
     });
 
 
   };
 
-  useEffect(()=>{
-    if(error){
-      toast.error(error,{position:'top-center',autoClose:3000});
+  useEffect(() => {
+    if (error) {
+      toast.error(error, { position: 'top-center', autoClose: 3000 });
       dispatch(removeErrors());
     }
-    if(success){
-      toast.success("Product created successfully.",{position:'top-center',autoClose:3000});
+    if (success) {
+      toast.success("Product created successfully.", { position: 'top-center', autoClose: 3000 });
       dispatch(removeSuccess());
       setname("");
       setprice("");
+      setdescription("");
       setcategory("");
       setimages([]);
       setImagePreviews([]);
       setstock("");
+      setSize("");
     }
-  },[dispatch,error,success])
+  }, [dispatch, error, success])
 
   return (
     <>
@@ -137,6 +142,20 @@ function CreateProduct() {
             ))}
           </select>
 
+          <select
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={size}
+            onChange={(e) => setSize(e.target.value)}
+            required
+          >
+            <option value="">Choose Size</option>
+            {sizes.map((item) => (
+              <option value={item} key={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+
           <input
             name="stock"
             type="number"
@@ -171,7 +190,7 @@ function CreateProduct() {
             type="submit"
             className="w-full bg-gray-900 text-white py-2 rounded-lg hover:bg-blue-700 transition"
           >
-            {loading?'Creating Product...':"Create"}
+            {loading ? 'Creating Product...' : "Create"}
           </button>
         </form>
       </div>
