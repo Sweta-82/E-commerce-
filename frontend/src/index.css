@@ -1,1 +1,29 @@
 @import "tailwindcss";
+@import 'react-toastify/dist/ReactToastify.css';
+
+@layer utilities {
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+}
+
+/* Custom Toastify Styles */
+.Toastify__toast {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+.Toastify__close-button {
+    color: #ffffff !important;
+}
+
+.Toastify__progress-bar {
+    background-color: #ffffff !important;
+}

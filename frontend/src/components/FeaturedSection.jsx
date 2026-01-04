@@ -1,92 +1,92 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Button from './Button';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { FaEye } from "react-icons/fa";
 import { IoBagAdd } from "react-icons/io5";
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProduct } from '../features/products/productSlice';
+import Loader from './Loader';
 
 const FeaturedSection = () => {
-    const ProductsData = [
-        {
-            _id: 1,
-            title: "Double the Warmth Girl's Fashion Jacket",
-            price: "$249.00",
-            sizes: ["S", "M"],
-            ratings: 4.5,
-            img: "https://i.pinimg.com/1200x/3e/24/b7/3e24b7db916793d5959ca7be0d31bc52.jpg",
-            back: 'https://i.pinimg.com/1200x/4f/97/66/4f97660788138baf9437286409b79deb.jpg',
-            thumbnails: [
-                "https://i.pinimg.com/736x/97/0f/64/970f64c39c4e4ceb7fc0e7e73363c7bf.jpg",
-                "https://i.pinimg.com/736x/97/0f/64/970f64c39c4e4ceb7fc0e7e73363c7bf.jpg",
-                "https://i.pinimg.com/736x/97/0f/64/970f64c39c4e4ceb7fc0e7e73363c7bf.jpg",
-                "https://i.pinimg.com/736x/97/0f/64/970f64c39c4e4ceb7fc0e7e73363c7bf.jpg"
-            ],
-        },
-    ];
-
+    const dispatch = useDispatch();
+    const { products, loading, error } = useSelector(state => state.product);
     const [back, setBack] = useState(null);
     const scrollRef = useRef(null);
+
+    useEffect(() => {
+        dispatch(getProduct({ page: 1 }));
+    }, [dispatch]);
 
     const scrollLeft = () => {
         console.log(scrollRef);
     }
 
+    if (loading) return <Loader />
+
+    const featuredProducts = products && products.length > 0 ? products.slice(0, 4) : [];
+
     return (
-        <div className=' w-full p-10'>
-            <h1 className='text-center p-5 font-extrabold text-[3vw]'>Featured Collection</h1>
+        <div className=' w-full p-5 md:p-10'>
+            <h1 className='text-center p-5 font-extrabold text-3xl md:text-[3vw]'>Featured Collection</h1>
             <div className='relative mb-5'>
-                <div className=' hidden sm:flex  justify-between w-full absolute top-[30%] -translate-y-1/2 px-4 z-10 text-white text-3xl'>
+                <div className=' hidden md:flex justify-between w-full absolute top-[30%] -translate-y-1/2 px-4 z-10 text-white text-3xl'>
                     <IoIosArrowBack ref={scrollRef} onClick={scrollLeft} className='bg-[#121212] cursor-pointer p-1 ' />
                     <IoIosArrowForward className=' bg-[#121212] cursor-pointer p-1 ' />
                 </div>
-                {/* <div className=' h-[40vw] mb-5 flex gap-4 overflow-x-auto no-scrollbar relative bg-green-600'> */}
-                {ProductsData.map((product, idx) => (
-                    <Link to={`${product._id}`} key={idx}>
-                        <div className=' lg:-h-[25vw] w-[28vw]'
-                            onMouseEnter={() => setBack(idx)}
-                            onMouseLeave={() => setBack(null)}>
-                            <div className=' w-[28vw] h-[30vw] shrink-0 relative hover:scale-105 transition-transform duration-300 ease-in-out overflow-hidden group'>
-                                <p className=' absolute bg-black font-bold text-white p-1  ml-1 mt-1 text-sm'>0</p>
-                                <FaEye className='absolute bottom-0 text-white bg-[#121212] p-1 text-2xl group' />
-                                {back === idx ?
-                                    <img
-                                        src={product.back}
-                                        className='object-cover w-full h-full  transition-transform duration-500'
-                                    />
-                                    :
-                                    <img
-                                        src={product.img}
-                                        className='object-cover w-full h-full'
-                                    />
-                                }
+                {/* Responsive Container */}
+                <div className='flex gap-4 overflow-x-auto no-scrollbar relative w-full h-auto md:h-[40vw] pb-4'>
+                    {featuredProducts.length === 0 ? <p className='w-full text-center'>No products found</p> :
+                        featuredProducts.map((product, idx) => (
+                            <Link to={`/product/${product._id}`} key={product._id || idx}>
+                                <div className='w-[45vw] sm:w-[45vw] md:w-[28vw] shrink-0'
+                                    onMouseEnter={() => setBack(idx)}
+                                    onMouseLeave={() => setBack(null)}>
+                                    <div className='w-full h-[45vw] sm:h-[40vw] md:h-[22vw] shrink-0 relative hover:scale-105 transition-transform duration-300 ease-in-out overflow-hidden group'>
+                                        <p className=' absolute bg-black font-bold text-white p-1  ml-1 mt-1 text-sm'>0</p>
+                                        <FaEye className='absolute bottom-0 text-white bg-[#121212] p-1 text-2xl group' />
+                                        {back === idx && product.image && product.image.length > 1 ?
+                                            <img
+                                                src={product.image[1].url}
+                                                alt={product.title}
+                                                className='object-cover w-full h-full  transition-transform duration-500'
+                                            />
+                                            :
+                                            <img
+                                                src={product.image && product.image.length > 0 ? product.image[0].url : "https://via.placeholder.com/300"}
+                                                alt={product.title}
+                                                className='object-cover w-full h-full'
+                                            />
+                                        }
 
-                            </div>
-                            <p className='text-[#121212] leading-3 mt-2'>{product.title}</p>
-                            {product.price} <span className="line-through text-gray-500 text-sm">{product.oldPrice}</span>
-                            <div className=' h-[3vw] w-[5vw] flex gap-2 mt-2'>
+                                    </div>
+                                    <p className='text-[#121212] leading-3 mt-2 font-bold truncate'>{product.title}</p>
+                                    <p className='text-gray-500 text-[12px] line-clamp-2 leading-tight mt-1'>{product.description}</p>
+                                    <p className='text-gray-700 mt-1'>₹{product.price}</p>
+                                    <div className='flex gap-2 mt-2 h-10 md:h-[3vw]'>
 
-                                {product.thumbnails.map((e, idx) => (
-                                    <img key={idx} src={e} alt=""
-                                        className=' w-full h-full object-cove outline'
+                                        {product.image && product.image.slice(0, 4).map((e, idx) => (
+                                            <img key={idx} src={e.url} alt=""
+                                                className='h-full aspect-square object-cover outline'
+                                            />
+                                        ))}
+                                    </div>
+
+                                    <div className=' w-full flex flex-wrap gap-2 mt-2 mb-2'>
+                                        {/* Treating size as a single string from backend, wrapping in array for map */}
+                                        {[product.size].map((size, idx) => (
+                                            <span key={idx} className='border border-[#121212] px-2 hover:bg-black hover:text-white uppercase'>{size}</span>
+                                        ))}
+                                    </div>
+                                    <Button
+                                        text="Add To Cart"
+                                        Icon={IoBagAdd}
+                                        className="bg-[#121212] active:text-white px-10 py-3 w-full bottom-0 border-none !mt-0 text-white"
                                     />
-                                ))}
-                            </div>
-
-                            <div className=' w-full flex flex-wrap gap-2 mt-2 mb-2'>
-                                {/* <p className='bg-[#121212] p-2 text-white'>S</p> */}
-                                {product.sizes.map((size, idx) => (
-                                    <span key={idx} className='border border-[#121212] px-2 hover:bg-black hover:text-white '>{size}</span>
-                                ))}
-                            </div>
-                            <Button
-                                text="Add To Cart"
-                                Icon={IoBagAdd}
-                                className="bg-[#121212] active:text-white px-10 py-3 w-full bottom-0 border-none !mt-0 text-white"
-                            />
-                        </div>
-                    </Link>
-                ))}
-                {/* </div> */}
+                                </div>
+                            </Link>
+                        ))}
+                </div>
             </div>
 
             <div className='w-full flex flex-col md:flex-row shadow-lg mt-10'>
