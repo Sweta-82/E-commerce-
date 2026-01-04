@@ -97,7 +97,7 @@ function Products() {
                       <button onClick={() => setCategory('')} className="mt-4 text-black underline">View all products</button>
                     </div>
                   ) : (
-                    <div className="flex flex-wrap gap-y-12 gap-x-6 justify-center md:justify-start">
+                    <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                       {products.map((product) => (
                         <Product key={product._id} product={product} />
                       ))}

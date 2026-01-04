@@ -9,7 +9,7 @@ function Product({ product }) {
 
   return (
     <Link to={`/product/${product._id}`}>
-      <div className='w-[40vw] sm:w-[40vw] md:w-[19vw] shrink-0'
+      <div className='w-full shrink-0'
         onMouseEnter={() => setBack(true)}
         onMouseLeave={() => setBack(false)}>
         <div className='w-full h-[40vw] sm:h-[40vw] md:h-[19vw] shrink-0 relative hover:scale-105 transition-transform duration-300 ease-in-out overflow-hidden group'>
@@ -19,13 +19,13 @@ function Product({ product }) {
             <img
               src={product.image[1].url}
               alt={product.title}
-              className='object-contain w-full h-full object-left transition-transform duration-500'
+              className='object-cover w-full h-full object-top transition-transform duration-500'
             />
             :
             <img
               src={product.image && product.image.length > 0 ? product.image[0].url : "https://via.placeholder.com/300"}
               alt={product.title}
-              className='object-contain w-full h-full object-left'
+              className='object-cover w-full h-full object-top'
             />
           }
 

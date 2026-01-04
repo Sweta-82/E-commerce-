@@ -24,10 +24,10 @@ const FeaturedSection = () => {
 
     if (loading) return <Loader />
 
-    const featuredProducts = products && products.length > 0 ? products.slice(0, 4) : [];
+    const featuredProducts = products && products.length > 0 ? products.slice(0, 5) : [];
 
     return (
-        <div className=' w-full p-5 md:p-10'>
+        <div className=' w-full'>
             <h1 className='text-center p-5 font-extrabold text-3xl md:text-[3vw]'>Featured Collection</h1>
             <div className='relative mb-5'>
                 <div className=' hidden md:flex justify-between w-full absolute top-[30%] -translate-y-1/2 px-4 z-10 text-white text-3xl'>
@@ -35,27 +35,27 @@ const FeaturedSection = () => {
                     <IoIosArrowForward className=' bg-[#121212] cursor-pointer p-1 ' />
                 </div>
                 {/* responsive container */}
-                <div className='flex gap-4 overflow-x-auto no-scrollbar relative w-full h-auto md:h-[40vw] pb-4'>
+                <div className='flex gap-4 overflow-x-auto no-scrollbar relative w-full h-auto pb-4'>
                     {featuredProducts.length === 0 ? <p className='w-full text-center'>No products found</p> :
                         featuredProducts.map((product, idx) => (
-                            <Link to={`/product/${product._id}`} key={product._id || idx}>
-                                <div className='w-[40vw] sm:w-[40vw] md:w-[19vw] shrink-0'
+                            <Link to={`/product/${product._id}`} key={product._id || idx} className='w-[40vw] md:w-[20vw] shrink-0'>
+                                <div className='w-full shrink-0'
                                     onMouseEnter={() => setBack(idx)}
                                     onMouseLeave={() => setBack(null)}>
-                                    <div className='w-full h-[40vw] sm:h-[40vw] md:h-[19vw] shrink-0 relative hover:scale-105 transition-transform duration-300 ease-in-out overflow-hidden group'>
+                                    <div className='w-full h-[45vw] md:h-[25vw] shrink-0 relative hover:scale-105 transition-transform duration-300 ease-in-out overflow-hidden group'>
                                         <p className=' absolute bg-black font-bold text-white p-1  ml-1 mt-1 text-sm'>0</p>
                                         <FaEye className='absolute bottom-0 text-white bg-[#121212] p-1 text-2xl group' />
                                         {back === idx && product.image && product.image.length > 1 ?
                                             <img
                                                 src={product.image[1].url}
                                                 alt={product.title}
-                                                className='object-contain w-full h-full object-left transition-transform duration-500'
+                                                className='object-cover w-full h-full object-top transition-transform duration-500'
                                             />
                                             :
                                             <img
                                                 src={product.image && product.image.length > 0 ? product.image[0].url : "https://via.placeholder.com/300"}
                                                 alt={product.title}
-                                                className='object-contain w-full h-full object-left'
+                                                className='object-cover w-full h-full object-top'
                                             />
                                         }
 
