@@ -28,7 +28,7 @@ function ProductDetails() {
 
   const { loading, error, product, reviewSuccess, reviewLoading } = useSelector((state) => state.product);
   const { error: cartError, success, message } = useSelector((state) => state.cart);
-  const { user } = useSelector((state) => state.user);
+  const { user, isAuthenticated } = useSelector((state) => state.user);
 
   const handleRatingChange = (newRating) => {
     setUserRating(newRating);
@@ -54,6 +54,10 @@ function ProductDetails() {
   };
 
   const addToCart = () => {
+    if (!isAuthenticated) {
+      toast.error('Please login to add items to cart', { position: 'top-center', autoClose: 3000 });
+      return;
+    }
     if (product.size && product.size.length > 0 && !selectedSize) {
       toast.error('Please select a size', { position: 'top-center', autoClose: 3000 });
       return;

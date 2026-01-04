@@ -73,62 +73,73 @@ function Register() {
   }, [dispatch, success]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center text-blue-700 mb-6">Sign Up</h2>
-        <form onSubmit={registerSubmit} encType="multipart/form-data" className="space-y-4">
+    <div className="min-h-screen flex items-center justify-center bg-white px-4">
+      <div className="bg-white shadow-2xl border border-gray-100 rounded-xl p-8 w-full max-w-md">
+        <h2 className="text-3xl font-extrabold text-center text-black mb-8 uppercase tracking-wider">Sign Up</h2>
+        <form onSubmit={registerSubmit} encType="multipart/form-data" className="space-y-5">
           <div>
+            <label className="block text-gray-700 font-bold mb-2 uppercase text-xs tracking-wide">Username</label>
             <input
               type="text"
               name="name"
               value={name}
               onChange={registerDataChange}
-              placeholder="Username"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your username"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
             />
           </div>
           <div>
+            <label className="block text-gray-700 font-bold mb-2 uppercase text-xs tracking-wide">Email</label>
             <input
               type="email"
               name="email"
               value={email}
               onChange={registerDataChange}
-              placeholder="Email"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your email"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
             />
           </div>
           <div>
+            <label className="block text-gray-700 font-bold mb-2 uppercase text-xs tracking-wide">Password</label>
             <input
               type="password"
               name="password"
               value={password}
               onChange={registerDataChange}
-              placeholder="Password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your password"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
             />
           </div>
           <div className="flex items-center gap-4">
-            <input
-              type="file"
-              name="avatar"
-              accept="image/*"
-              onChange={registerDataChange}
-              className="w-full px-4 py-1 border-1 border-gray-400 rounded-lg file:mr-4 file:py-1 file:px-4 file:bg-gray-100 file:rounded-lg file:text-sm file:border-black  transition mb-" />
+            <div className="w-full">
+              <label className="block text-gray-700 font-bold mb-2 uppercase text-xs tracking-wide">Avatar</label>
+              <input
+                type="file"
+                name="avatar"
+                accept="image/*"
+                onChange={registerDataChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-black file:text-white hover:file:bg-gray-800 transition-all text-sm text-gray-500"
+              />
+            </div>
             <img
               src={avatarPreview}
               alt="Avatar Preview"
-              className="w-12 h-12 rounded-full object-cover border border-gray-300"
+              className="w-12 h-12 rounded-full object-cover border border-gray-300 mt-6"
             />
           </div>
-          <Button
-            type="submit"
-            text={loading ? 'Signing Up...' : 'Sign Up'}
-            className="w-full"
-          />
-          <p className="text-center text-sm mt-2">
+
+          <div className="pt-2">
+            <Button
+              type="submit"
+              text={loading ? 'SIGNING UP...' : 'SIGN UP'}
+              className="w-full bg-black text-white hover:bg-gray-800 transition-colors py-3 font-bold uppercase tracking-widest"
+            />
+          </div>
+
+          <p className="text-center text-sm mt-6 text-gray-600">
             Already have an account?{' '}
-            <Link to="/login" className="text-blue-600 hover:underline">
-              Sign in here
+            <Link to="/login" className="text-black font-bold hover:underline ml-1">
+              SIGN IN HERE
             </Link>
           </p>
         </form>

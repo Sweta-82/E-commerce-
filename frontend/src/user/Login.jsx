@@ -41,15 +41,15 @@ function Login() {
   }, [dispatch, success])
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm">
-        <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">Login</h2>
+    <div className="flex justify-center items-center min-h-screen bg-white">
+      <div className="bg-white p-8 rounded-xl shadow-2xl border border-gray-100 w-full max-w-sm">
+        <h2 className="text-3xl font-extrabold text-center text-black mb-6 uppercase tracking-wider">Login</h2>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
-            <label className="block text-gray-700 font-medium mb-2">Email</label>
+            <label className="block text-gray-700 font-bold mb-2 uppercase text-xs tracking-wide">Email</label>
             <input
               type="email"
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
               placeholder="Enter your email"
               value={Useremail}
               onChange={(e) => setUserEmail(e.target.value)}
@@ -58,10 +58,10 @@ function Login() {
           </div>
 
           <div className="mb-2">
-            <label className="block text-gray-700 font-medium mb-2">Password</label>
+            <label className="block text-gray-700 font-bold mb-2 uppercase text-xs tracking-wide">Password</label>
             <input
               type="password"
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
               placeholder="Enter your password"
               value={Userpassword}
               onChange={(e) => setUserPassword(e.target.value)}
@@ -69,23 +69,23 @@ function Login() {
             />
           </div>
 
-          <div className="text-right mb-4">
-            <Link to="/password/forgot" className="text-sm text-blue-500 hover:underline">
-              Forgot Password?
+          <div className="text-right mb-6">
+            <Link to="/password/forgot" className="text-xs font-semibold text-gray-500 hover:text-black transition-colors">
+              FORGOT PASSWORD?
             </Link>
           </div>
 
           <Button
             type="submit"
-            text="Sign In"
-            className="w-full"
+            text="SIGN IN"
+            className="w-full bg-black text-white hover:bg-gray-800 transition-colors py-3 font-bold uppercase tracking-widest"
           />
         </form>
 
-        <p className="mt-6 text-center text-sm text-gray-600">
+        <p className="mt-8 text-center text-sm text-gray-600">
           Don’t have an account?{" "}
-          <Link to="/register" className="text-blue-500 font-medium hover:underline">
-            Create Account
+          <Link to="/register" className="text-black font-bold hover:underline ml-1">
+            CREATE ACCOUNT
           </Link>
         </p>
       </div>

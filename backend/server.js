@@ -12,7 +12,7 @@ import { v2 as cloudinary } from 'cloudinary';
 
 const port = process.env.PORT || 3000;
 
-console.log('DB_URL:', process.env.DB_URL);  // Debugging line to check
+
 
 connectMongoDB();
 

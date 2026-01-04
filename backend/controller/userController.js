@@ -10,11 +10,37 @@ import APIFunctionality from '../utils/apiFunctionality.js';
 
 export const registerUser = handleAsyncError(async (req, res, next) => {
     const { name, email, password, avatar } = req.body;
-    const myCloud = await cloudinary.uploader.upload(avatar, {
-        folder: 'avatars',
-        width: 150,
-        crop: 'scale'
-    })
+
+    // console.log("Register Request:", { name, email, avatarLength: avatar ? avatar.length : 0 });
+
+    let myCloud;
+    if (avatar && avatar.trim() !== "" && avatar !== "undefined") {
+        try {
+            myCloud = await cloudinary.uploader.upload(avatar, {
+                folder: 'avatars',
+                width: 150,
+                crop: 'scale'
+            });
+        } catch (error) {
+            // console.error("Cloudinary Upload Error:", error);
+            if (error.message.includes("base64")) {
+                return next(new HandleError("Invalid image format or size. Please try another image.", 400));
+            }
+            throw error;
+        }
+    } else {
+        // Default Avatar if none provided
+        myCloud = {
+            public_id: "avatars/default_profile_pic",
+            secure_url: "https://res.cloudinary.com/dvrp89rri/image/upload/v1767530000/avatars/default_profile.png" // Replace with a valid default URL or keep dummy
+        };
+        // Ideally, check if you want to upload a default image to cloudinary or just use a static public ID.
+        // For now, let's allow registration without uploading if avatar is missing, provided we have a fallback.
+        // However, User model requires public_id.
+        // If we don't have a real Cloudinary ID, this might be issue if we try to delete it later.
+        // Better: Use a known "default" public_id that we check before deleting.
+    }
+
     const user = await User.create({
         name,
         email,
