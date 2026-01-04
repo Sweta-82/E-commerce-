@@ -10,8 +10,8 @@ function Footer() {
   return (
     <footer className="bg-black text-gray-100 py-10">
       <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row flex-wrap justify-between gap-10 text-center sm:text-left">
-        
-        {/* Contact Section */}
+
+        {/* contact section */}
         <div className="flex-1 min-w-[200px]">
           <h3 className="text-lg font-semibold mb-3">Contact</h3>
           <ul className="space-y-3">
@@ -27,7 +27,7 @@ function Footer() {
           </ul>
         </div>
 
-        {/* Follow Me Section */}
+        {/* follow me section */}
         <div className="flex-1 min-w-[200px]">
           <h3 className="text-lg font-semibold mb-3">Follow Me</h3>
           <ul className="flex justify-center sm:justify-start gap-5 text-xl">
@@ -37,7 +37,7 @@ function Footer() {
           </ul>
         </div>
 
-        {/* About Section */}
+        {/* about section */}
         <div className="flex-1 min-w-[200px]">
           <h3 className="text-lg font-semibold mb-3">About</h3>
           <p className="text-sm leading-relaxed">
@@ -45,7 +45,7 @@ function Footer() {
           </p>
         </div>
       </div>
-        <div className=" text-gray-400 text-sm text-center py-4">
+      <div className=" text-gray-400 text-sm text-center py-4">
         © {new Date().getFullYear()} Your Name. All rights reserved.
       </div>
     </footer>

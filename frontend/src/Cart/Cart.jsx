@@ -77,7 +77,7 @@ function Cart() {
                         <Button
                             onClick={checkoutHandler}
                             text="Proceed to Checkout"
-                            className="w-full mt-6 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-md transition border-none"
+                            className="w-full mt-6 bg-black hover:bg-gray-800 text-white py-2 rounded-md transition border-none"
                         />
                     </div>
                 </div>

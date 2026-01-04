@@ -44,7 +44,7 @@ function Shipping() {
 
       <div className="min-h-screen bg-gray-100 py-10 px-4">
         <div className="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
-          <h1 className="text-3xl font-bold text-center text-blue-800 mb-6">Shipping Details</h1>
+          <h1 className="text-3xl font-bold text-center text-black uppercase mb-6">Shipping Details</h1>
           <form onSubmit={shippingInfoSubmit} className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
@@ -55,7 +55,7 @@ function Shipping() {
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   placeholder="Enter your address"
-                  className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
                 />
               </div>
 
@@ -67,7 +67,7 @@ function Shipping() {
                   value={pinCode}
                   onChange={(e) => setPinCode(e.target.value)}
                   placeholder="Enter your pin code"
-                  className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
                 />
               </div>
 
@@ -79,7 +79,7 @@ function Shipping() {
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   placeholder="Enter your phone number"
-                  className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
                 />
               </div>
 
@@ -93,7 +93,7 @@ function Shipping() {
                     setState("");
                     setCity("");
                   }}
-                  className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
                 >
                   <option value="">Select a Country</option>
                   {Country.getAllCountries().map((item) => (
@@ -114,7 +114,7 @@ function Shipping() {
                       setState(e.target.value);
                       setCity("");
                     }}
-                    className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
                   >
                     <option value="">Select a State</option>
                     {State.getStatesOfCountry(country).map((item) => (
@@ -133,7 +133,7 @@ function Shipping() {
                     name="city"
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
-                    className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
                   >
                     <option value="">Select a City</option>
                     {City.getCitiesOfState(country, state).map((item) => (

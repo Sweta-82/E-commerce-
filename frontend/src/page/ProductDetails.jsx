@@ -19,6 +19,7 @@ function ProductDetails() {
   const [quantity, setQuantity] = useState(1);
   const [cartLoading, setCartLoading] = useState(false);
   const [comment, setComment] = useState('');
+  const [selectedSize, setSelectedSize] = useState('');
   const [selectedImage, setSelectedImage] = useState('');
 
   const { id } = useParams();
@@ -53,12 +54,16 @@ function ProductDetails() {
   };
 
   const addToCart = () => {
+    if (product.size && product.size.length > 0 && !selectedSize) {
+      toast.error('Please select a size', { position: 'top-center', autoClose: 3000 });
+      return;
+    }
     setCartLoading(true);
     setTimeout(() => {
       setCartLoading(false);
       toast.success('Item added successfully', { position: 'top-center', autoClose: 3000 });
     }, 1000);
-    dispatch(addItemsToCart({ id, quantity }));
+    dispatch(addItemsToCart({ id, quantity, size: selectedSize }));
   };
 
   const handleReviewSubmit = (e) => {
@@ -143,20 +148,65 @@ function ProductDetails() {
       <Navbar />
       <div className="max-w-5xl mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row gap-8 bg-white shadow-md rounded-lg p-6">
-          {/* Product Image */}
-          <div className="md:w-1/2 flex justify-center items-center">
-            <img
-              src={selectedImage?.replace('./', '/')}
-              alt={product.title}
-              className="rounded-lg max-h-96 object-contain"
-            />
+          {/* product image */}
+          <div className="md:w-1/2 flex flex-col items-center gap-4">
+            <div className='w-full h-96 flex justify-center items-center overflow-hidden rounded-lg bg-gray-50'>
+              <img
+                src={selectedImage?.replace('./', '/')}
+                alt={product.title}
+                className="max-h-full max-w-full object-contain"
+              />
+            </div>
+            {/* thumbnail gallery */}
+            {product.image && product.image.length > 1 && (
+              <div className="flex gap-2 overflow-x-auto py-2 w-full justify-center">
+                {product.image.map((img, index) => (
+                  <img
+                    key={index}
+                    src={img.url}
+                    alt={`Thumbnail ${index}`}
+                    className={`w-20 h-20 object-cover cursor-pointer rounded-md border-2 transition-all ${selectedImage === img.url ? 'border-black opacity-100' : 'border-gray-200 opacity-60 hover:opacity-100'}`}
+                    onClick={() => setSelectedImage(img.url)}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
-          {/* Product Info */}
+          {/* product info */}
           <div className="md:w-1/2 space-y-4">
-            <h2 className="text-3xl font-semibold text-gray-800">{product.title}</h2>
+            <h2 className="text-3xl font-semibold text-gray-800 uppercase">{product.title}</h2>
             <p className="text-gray-600">{product.description}</p>
-            <p className="text-xl font-bold text-orange-600">Price: ₹ {product.price}</p>
+            <p className="text-xl font-bold text-gray-500">Price: ₹ {product.price}</p>
+
+            {/* size display */}
+            {product.size && (
+              <div className="flex gap-2 items-center">
+                <span className="font-semibold text-gray-700">Available Sizes:</span>
+                <div className="flex gap-1">
+                  {["S", "M", "L", "XL", "XXL"].map((size, idx) => {
+                    const isAvailable = product.size.includes(size);
+                    const isSelected = selectedSize === size;
+                    return (
+                      <button
+                        key={idx}
+                        disabled={!isAvailable}
+                        onClick={() => isAvailable && setSelectedSize(size)}
+                        className={`border px-3 py-1 text-sm font-medium transition-all duration-200 rounded-md
+                          ${isSelected
+                            ? 'bg-black text-white border-black shadow-md'
+                            : isAvailable
+                              ? 'bg-white text-gray-800 border-gray-300 hover:border-black hover:bg-gray-50'
+                              : 'bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed opacity-60'
+                          }`}
+                      >
+                        {size}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
 
             <div className="flex items-center gap-2">
               <Rating value={product.ratings} disabled={true} onRatingChange={handleRatingChange} />
@@ -249,8 +299,8 @@ function ProductDetails() {
           </div>
         </div>
 
-        {/* Write Review */}
-        {/* Reviews Section - Hidden for Admins */}
+        {/* write review */}
+        {/* reviews section - hidden for admins */}
         {(!user || user.role !== 'admin') && (
           <>
             <form

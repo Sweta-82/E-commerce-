@@ -113,7 +113,7 @@ function Dashboard() {
               </div>
             </div>
 
-            {/* Card: Products */}
+            {/* card */}
             <div className="bg-white shadow-lg rounded-xl p-6 border-l-4 border-black transform hover:-translate-y-1 transition-transform duration-300">
               <div className="flex justify-between items-start">
                 <div>
@@ -130,7 +130,7 @@ function Dashboard() {
               </div>
             </div>
 
-            {/* Card: Orders */}
+            {/* orders */}
             <div className="bg-white shadow-lg rounded-xl p-6 border-l-4 border-black transform hover:-translate-y-1 transition-transform duration-300">
               <div className="flex justify-between items-start">
                 <div>
@@ -143,7 +143,7 @@ function Dashboard() {
               </div>
             </div>
 
-            {/* Card: Users */}
+            {/* users */}
             <div className="bg-white shadow-lg rounded-xl p-6 border-l-4 border-black transform hover:-translate-y-1 transition-transform duration-300">
               <div className="flex justify-between items-start">
                 <div>

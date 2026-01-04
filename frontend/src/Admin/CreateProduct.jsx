@@ -16,7 +16,7 @@ function CreateProduct() {
   const [description, setdescription] = useState('');
   const [category, setcategory] = useState('');
   const [stock, setstock] = useState('');
-  const [size, setSize] = useState('');
+  const [size, setSize] = useState([]);
   const [images, setimages] = useState([]);
   const [imagePreviews, setImagePreviews] = useState([]);
 
@@ -43,6 +43,14 @@ function CreateProduct() {
     });
   };
 
+  const handleSizeChange = (selectedSize) => {
+    setSize((prev) =>
+      prev.includes(selectedSize)
+        ? prev.filter((s) => s !== selectedSize)
+        : [...prev, selectedSize]
+    );
+  };
+
   const createProductSubmit = (e) => {
     e.preventDefault();
 
@@ -52,7 +60,12 @@ function CreateProduct() {
     myForm.set('description', description);
     myForm.set('category', category);
     myForm.set('stock', stock);
-    myForm.set('size', size);
+
+
+
+    size.forEach(s => {
+      myForm.append('size', s);
+    });
 
     images.forEach((img) => {
       myForm.append('images', img); // key name must match backend
@@ -84,7 +97,7 @@ function CreateProduct() {
       setimages([]);
       setImagePreviews([]);
       setstock("");
-      setSize("");
+      setSize([]);
     }
   }, [dispatch, error, success])
 
@@ -144,19 +157,25 @@ function CreateProduct() {
             ))}
           </select>
 
-          <select
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={size}
-            onChange={(e) => setSize(e.target.value)}
-            required
-          >
-            <option value="">Choose Size</option>
-            {sizes.map((item) => (
-              <option value={item} key={item}>
-                {item}
-              </option>
-            ))}
-          </select>
+          <div className="space-y-2">
+            <p className="font-semibold text-gray-700">Select Sizes</p>
+            <div className="flex flex-wrap gap-2">
+              {sizes.map((item) => (
+                <button
+                  type="button"
+                  key={item}
+                  onClick={() => handleSizeChange(item)}
+                  className={`px-4 py-2 rounded border transition-colors ${size.includes(item)
+                    ? 'bg-black text-white border-black'
+                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                    }`}
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+            {size.length === 0 && <p className="text-red-500 text-sm">Please select at least one size.</p>}
+          </div>
 
           <input
             name="stock"

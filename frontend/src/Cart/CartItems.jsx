@@ -126,7 +126,7 @@ function CartItem({ item }) {
           text="Remove"
           onClick={handleRemove}
           disabled={loading}
-          className="bg-red-600 hover:bg-red-700 text-white !px-4 !py-1 rounded disabled:opacity-50 !mt-0 border-none"
+          className="bg-gray-600 hover:bg-gray-700 text-white !px-4 !py-1 rounded disabled:opacity-50 !mt-0 border-none"
         />
       </div>
     </div>

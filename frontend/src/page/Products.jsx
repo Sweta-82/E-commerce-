@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PageTitle from '../components/PageTitle';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import Product from '../components/Product';
 import { getProduct, removeErrors } from '../features/products/productSlice';
@@ -46,21 +47,36 @@ function Products() {
   }
 
   return (
-    <>
-      {loading ? (<Loader />) : (
-        <>
-          <PageTitle title="All Products" />
-          <Navbar />
+    <div className="flex flex-col min-h-screen bg-white text-[#121212]">
+      <PageTitle title="All Products" />
+      <Navbar />
 
-          <div className="flex p-6 gap-6">
-            {/* Category Side */}
-            <div className="w-1/5">
-              <h3 className="text-xl font-semibold mb-4">Categories</h3>
-              <div className="flex flex-col gap-2">
+      {loading ? (<Loader />) : (
+        <div className="flex-grow max-w-[1400px] mx-auto w-full px-4 md:px-8 py-10">
+
+          {/* Header */}
+          <div className="mb-10 text-center md:text-left">
+            <h1 className="text-3xl md:text-4xl font-extrabold uppercase tracking-tight">Our Collection</h1>
+            <p className="text-gray-500 mt-2">Discover our curated selection of premium goods.</p>
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-8 lg:gap-12">
+            {/* Category Side (Sticky on Desktop) */}
+            <div className="w-full md:w-1/5 md:sticky md:top-24 h-fit">
+              <h3 className="text-lg font-bold uppercase tracking-widest border-b border-black pb-3 mb-6">Categories</h3>
+
+              {/* Category List - Scrolls horizontal on mobile, vertical list on desktop */}
+              <div className="flex flex-row md:flex-col gap-4 overflow-x-auto md:overflow-visible no-scrollbar pb-2 md:pb-0">
+                <button
+                  className={`whitespace-nowrap text-left text-sm font-medium transition-all duration-200 ${category === '' ? "text-black font-bold pl-2 border-l-2 border-black" : "text-gray-500 hover:text-black"}`}
+                  onClick={() => setCategory('')}
+                >
+                  All Items
+                </button>
                 {categories.map((cat) => (
                   <button
                     key={cat}
-                    className={`p-2 rounded text-left ${category === cat ? "bg-black text-white" : "bg-gray-100 hover:bg-gray-200 text-gray-800"}`}
+                    className={`whitespace-nowrap text-left text-sm font-medium transition-all duration-200 ${category === cat ? "text-black font-bold pl-2 border-l-2 border-black" : "text-gray-500 hover:text-black"}`}
                     onClick={() => setCategory(cat)}
                   >
                     {cat}
@@ -69,33 +85,38 @@ function Products() {
               </div>
             </div>
 
-            {/* Product Cards */}
-            <div className="w-4/5">
-              {loading ? (
-                <p>Loading...</p>
-              ) : error ? (
-                <p className="text-red-500">{error}</p>
+            {/* product cards */}
+            <div className="w-full md:w-4/5">
+              {error ? (
+                <p className="text-center text-red-500 py-10">{error}</p>
               ) : (
-                <div className="flex flex-wrap gap-6">
+                <div className="min-h-[50vh]">
                   {products.length === 0 ? (
-                    <div className="w-full text-center py-10">
-                      <h2 className="text-2xl font-bold text-gray-500">No Product Found</h2>
+                    <div className="flex flex-col items-center justify-center h-64 text-gray-400">
+                      <p className="text-xl">No products found in this category.</p>
+                      <button onClick={() => setCategory('')} className="mt-4 text-black underline">View all products</button>
                     </div>
                   ) : (
-                    products.map((product) => (
-                      <Product key={product._id} product={product} />
-                    ))
+                    <div className="flex flex-wrap gap-y-12 gap-x-6 justify-center md:justify-start">
+                      {products.map((product) => (
+                        <Product key={product._id} product={product} />
+                      ))}
+                    </div>
                   )}
                 </div>
               )}
+              <div className='mt-12'>
+                <Pagination
+                  currentPage={currentPage}
+                  onPageChange={handlePageChange}
+                />
+              </div>
             </div>
           </div>
-        </>)}
-      <Pagination
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-      />
-    </>
+        </div>
+      )}
+      <Footer />
+    </div>
   );
 }
 

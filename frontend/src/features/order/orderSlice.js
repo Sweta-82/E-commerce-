@@ -28,7 +28,7 @@ export const getAllMyOrder = createAsyncThunk('order/getAllMyOrder', async (_, {
 // Get order details
 export const getOrderDetails = createAsyncThunk('order/getOrderDetails', async (orderID, { rejectWithValue }) => {
     try {
-        const { data } = await axios.get(`/api/v1/admin/order/${orderID}`);
+        const { data } = await axios.get(`/api/v1/order/${orderID}`);
         return data;
     } catch (error) {
         return rejectWithValue(error.response?.data || 'Failed to fetch order details');

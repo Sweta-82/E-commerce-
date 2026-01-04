@@ -29,7 +29,7 @@ function ProcessOrder() {
             dispatch(removeErrors());
         }
 
-        // Cleanup to avoid showing stale errors
+        // cleanup to avoid showing stale errors
         return () => { dispatch(removeErrors()) }
     }, [dispatch, id, error]);
 
@@ -75,10 +75,10 @@ function ProcessOrder() {
                     ) : (
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-                            {/* Left Column: Order Details */}
+                            {/* left column: order details */}
                             <div className="lg:col-span-2 space-y-8">
 
-                                {/* Status Header */}
+                                {/* status header */}
                                 <div className="bg-white rounded-xl shadow-sm p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center border border-gray-100">
                                     <div>
                                         <h1 className="text-2xl font-extrabold text-gray-800 flex items-center gap-2">
@@ -92,7 +92,7 @@ function ProcessOrder() {
                                     </div>
                                 </div>
 
-                                {/* Shipping Info Card */}
+                                {/* shipping info card */}
                                 <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
                                     <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2 border-b pb-2">
                                         <FaShippingFast className="text-blue-500" /> Shipping Details
@@ -130,7 +130,7 @@ function ProcessOrder() {
                                     </div>
                                 </div>
 
-                                {/* Payment Info Card */}
+                                {/* payment info card */}
                                 <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
                                     <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2 border-b pb-2">
                                         <MdPayment className="text-green-500" /> Payment Information
@@ -154,7 +154,7 @@ function ProcessOrder() {
                                     </div>
                                 </div>
 
-                                {/* Order Items Card */}
+                                {/* order items card */}
                                 <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
                                     <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2 border-b pb-2">
                                         <FaBoxOpen className="text-orange-500" /> Order Items ({order.orderItems?.length})
@@ -180,7 +180,7 @@ function ProcessOrder() {
 
                             </div>
 
-                            {/* Right Column: Process Action */}
+                            {/* right column: process action */}
                             <div className="lg:col-span-1">
                                 <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 sticky top-24">
                                     <h2 className="text-xl font-bold mb-6 text-gray-800 flex items-center gap-2">

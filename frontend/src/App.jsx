@@ -20,6 +20,7 @@ import OrderConform from './Cart/OrderConform'
 import Payment from './Cart/Payment'
 import OrderSuccess from './Cart/OrderSuccess'
 import MyOrder from './Order/MyOrder'
+import OrderDetails from './Order/OrderDetails'
 import Dashboard from './Admin/Dashboard'
 import ProductList from './Admin/ProductList'
 import CreateProduct from './Admin/CreateProduct'
@@ -59,6 +60,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/shipping" element={<Shipping />} />
           <Route path="/order/conform" element={<OrderConform />} />
+          <Route path="/order/:id" element={<OrderDetails />} />
           <Route path="/process/payment" element={<Payment />} />
           <Route path="/success" element={<OrderSuccess />} />
 

@@ -65,7 +65,7 @@ function UpdateProduct() {
 
         setimages([]);
         setImagePreviews([]);
-        setOldImages([]);    // Clear old images if new ones are selected
+        setOldImages([]);    // clear old images if new ones are selected
 
         files.forEach((file) => {
             const reader = new FileReader();
@@ -192,7 +192,7 @@ function UpdateProduct() {
                     </div>
 
                     <div className="flex flex-wrap gap-4 mt-4">
-                        {/* Show Old Images */}
+                        {/* show old images */}
                         {oldImages && oldImages.map((img, index) => (
                             <img
                                 key={`old-${index}`}
@@ -202,7 +202,7 @@ function UpdateProduct() {
                             />
                         ))}
 
-                        {/* Show New Image Previews */}
+                        {/* show new image previews */}
                         {imagePreviews.map((img, index) => (
                             <img
                                 src={img}

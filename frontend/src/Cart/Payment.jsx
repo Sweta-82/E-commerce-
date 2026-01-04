@@ -129,8 +129,13 @@ function Payment() {
           notes: {
             address: "Razorpay Corporate Office",
           },
+          modal: {
+            ondismiss: function () {
+              setLoading(false);
+            },
+          },
           theme: {
-            color: "#2563EB",
+            color: "#121212",
           },
         };
 
@@ -165,7 +170,7 @@ function Payment() {
             {/* COD Option */}
             <div
               className={`flex items-center p-4 border rounded-xl cursor-pointer transition-all duration-200 ${paymentMethod === "COD"
-                ? "border-blue-600 bg-blue-50 ring-2 ring-blue-100"
+                ? "border-black bg-gray-50 ring-2 ring-black"
                 : "border-gray-200 hover:border-black"
                 }`}
               onClick={() => setPaymentMethod("COD")}
@@ -176,7 +181,7 @@ function Payment() {
                 value="COD"
                 checked={paymentMethod === "COD"}
                 onChange={() => setPaymentMethod("COD")}
-                className="w-5 h-5 text-blue-600 focus:ring-blue-500"
+                className="w-5 h-5 text-black focus:ring-black"
               />
               <span className="ml-4 text-lg font-medium text-gray-800">
                 Cash on Delivery
@@ -186,7 +191,7 @@ function Payment() {
             {/* Online Option */}
             <div
               className={`flex items-center p-4 border rounded-xl cursor-pointer transition-all duration-200 ${paymentMethod === "Card"
-                ? "border-blue-600 bg-blue-50 ring-2 ring-blue-100"
+                ? "border-black bg-gray-50 ring-2 ring-black"
                 : "border-gray-200 hover:border-black"
                 }`}
               onClick={() => setPaymentMethod("Card")}
@@ -197,7 +202,7 @@ function Payment() {
                 value="Card"
                 checked={paymentMethod === "Card"}
                 onChange={() => setPaymentMethod("Card")}
-                className="w-5 h-5 text-blue-600 focus:ring-blue-500"
+                className="w-5 h-5 text-black focus:ring-black"
               />
               <span className="ml-4 text-lg font-medium text-gray-800">
                 Online (Razorpay)

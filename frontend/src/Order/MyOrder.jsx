@@ -35,26 +35,30 @@ function MyOrders() {
                         <table className="min-w-full table-auto text-sm text-left">
                             <thead className="bg-black text-white">
                                 <tr>
-                                    <th className="px-6 py-3">Order ID</th>
-                                    <th className="px-6 py-3">Items Count</th>
-                                    <th className="px-6 py-3">Status</th>
-                                    <th className="px-6 py-3">Total Price</th>
-                                    <th className="px-6 py-3 text-center">View</th>
+                                    <th className="px-6 py-3 uppercase tracking-wider text-xs font-bold">Order ID</th>
+                                    <th className="px-6 py-3 uppercase tracking-wider text-xs font-bold">Items</th>
+                                    <th className="px-6 py-3 uppercase tracking-wider text-xs font-bold">Status</th>
+                                    <th className="px-6 py-3 uppercase tracking-wider text-xs font-bold">Total</th>
+                                    <th className="px-6 py-3 uppercase tracking-wider text-xs font-bold text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody className="text-gray-700">
                                 {orders.map(order => (
-                                    <tr key={order._id} className="border-b hover:bg-gray-50">
-                                        <td className="px-6 py-4">{order._id}</td>
-                                        <td className="px-6 py-4">{order.orderItems.length}</td>
-                                        <td className="px-6 py-4">{order.orderStatus}</td>
-                                        <td className="px-6 py-4">₹{order.totalPrice}</td>
+                                    <tr key={order._id} className="border-b hover:bg-gray-50 transition-colors">
+                                        <td className="px-6 py-4 font-mono text-sm font-medium text-gray-900">{order._id}</td>
+                                        <td className="px-6 py-4 text-sm">{order.orderItems.length}</td>
+                                        <td className="px-6 py-4">
+                                            <span className={`px-2 py-1 rounded text-xs font-bold uppercase ${order.orderStatus === 'Delivered' ? 'bg-green-100 text-green-700' : 'bg-red-50 text-red-600'}`}>
+                                                {order.orderStatus}
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4 text-sm font-bold">₹{order.totalPrice}</td>
                                         <td className="px-6 py-4 text-center">
                                             <Link
                                                 to={`/order/${order._id}`}
-                                                className="text-black hover:text-gray-700 transition"
+                                                className="inline-block bg-black text-white px-4 py-2 rounded text-xs font-bold uppercase hover:bg-gray-800 transition-colors"
                                             >
-                                                <MdLaunch />
+                                                Details
                                             </Link>
                                         </td>
                                     </tr>

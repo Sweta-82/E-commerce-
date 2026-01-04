@@ -44,28 +44,30 @@ function Navbar() {
     <nav className="bg-black text-white px-8 py-3 ">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
 
-        {/* Left Section: Logo + Links */}
+        {/* left section: logo + links */}
         <div className="flex items-center gap-10">
-          {/* Logo */}
-          {/* Logo */}
-          <Link to="/">
-            <img src="/image.png" alt="Ecommerce Logo" className="h-12 w-auto object-contain" />
+          {/* logo */}
+          <Link to="/" className='no-underline flex items-center gap-2'>
+            <img src="/logo_new.jpg" alt="Logo" className="h-10 w-10 rounded-full object-cover" />
+            <h1 className='text-3xl font-extrabold tracking-widest text-white hover:text-gray-300 transition-colors duration-300 font-serif'>
+              Bn
+            </h1>
           </Link>
 
-          {/* Links */}
+          {/*   links */}
           <ul className="hidden sm:flex gap-6 text-sm font-medium">
-            <li className="hover:text-[#fbf504] cursor-pointer"><Link to="/">Home</Link></li>
-            <li className="hover:text-[#fbf504] cursor-pointer"><Link to="/products">Products</Link></li>
-            <li className="hover:text-[#fbf504] cursor-pointer">About Us</li>
-            <li className="hover:text-[#fbf504] cursor-pointer">Contact</li>
+            <li className="hover:text-gray-300 cursor-pointer transition-colors"><Link to="/">Home</Link></li>
+            <li className="hover:text-gray-300 cursor-pointer transition-colors"><Link to="/products">Products</Link></li>
+            <li className="hover:text-gray-300 cursor-pointer transition-colors">About Us</li>
+            <li className="hover:text-gray-300 cursor-pointer transition-colors">Contact</li>
           </ul>
         </div>
 
-        {/* Right Section: Search + Cart + Sign Up */}
+        {/* right section: search + cart + sign up */}
         <div className="flex items-center gap-4">
 
-          {/* Search Box */}
-          <div className="flex items-center gap-2 border border-gray-300 px-2 py-1 rounded-2xl">
+          {/* search box */}
+          <div className="hidden md:flex items-center gap-2 border border-gray-300 px-2 py-1 rounded-2xl">
             <input
               type="text"
               placeholder="Search..."
@@ -74,11 +76,10 @@ function Navbar() {
             <CiSearch className="text-xl" />
           </div>
 
-          {/* Cart Icon */}
-          {/* Cart Icon / Notification for Admin */}
+          {/* cart icon */}
           {user?.role === 'admin' ? (
             <Link to="/admin/notifications">
-              <button className="relative text-2xl hover:text-[#fbf504]">
+              <button className="relative text-2xl hover:text-gray-300 transition-colors">
                 <FaBell />
                 {notificationCount > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
@@ -89,21 +90,23 @@ function Navbar() {
             </Link>
           ) : (
             <Link to='/cart'>
-              <button className="relative text-2xl hover:text-[#fbf504]">
+              <button className="relative text-2xl hover:text-gray-300 transition-colors">
                 <FaCartPlus />
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                  {cartCount}
-                </span>
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                    {cartCount}
+                  </span>
+                )}
               </button>
             </Link>
           )}
 
-          {/* Signup Icon */}
+          {/* signup icon */}
           <div className="relative">
             {isAuthenticated && user ? (
               <UserDashboard user={user} />
             ) : (
-              <button className="text-2xl hover:text-[#fbf504]">
+              <button className="text-2xl hover:text-gray-300 transition-colors">
                 <Link to="/register">
                   <IoMdPersonAdd />
                 </Link>

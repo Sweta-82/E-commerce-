@@ -4,6 +4,8 @@ import { allMyOrder, createNewOrder, getAllMyOrder, getSingleOrder, updateOrderS
 const router = express.Router();
 router.route('/new/order').post(verifyUserAuth, createNewOrder)
 
+router.route('/order/:id').get(verifyUserAuth, getSingleOrder);
+
 router.route('/admin/order/:id').get(verifyUserAuth, roleBasedAccess('admin'), getSingleOrder)
     .put(verifyUserAuth, roleBasedAccess('admin'), updateOrderStatus)
     .delete(verifyUserAuth, roleBasedAccess('admin'), deleteOrder);

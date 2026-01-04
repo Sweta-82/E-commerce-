@@ -97,7 +97,7 @@ function UserDashboard({ user }) {
                 key={item.name}
                 onClick={item.funcName}
                 className={`w-full text-left px-4 py-2 border-gray-200 rounded-md transition-colors
-                    hover:bg-[#ffee01db] 
+                    hover:bg-black hover:text-white 
                     ${item.name === 'Orders' && cartItems.length > 0
                     ? 'text-black'
                     : 'text-gray-800'

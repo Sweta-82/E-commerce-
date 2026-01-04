@@ -48,7 +48,7 @@ function ProductList() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white shadow-lg rounded-xl overflow-hidden">
 
-            {/* Header */}
+            {/* header */}
             <div className="flex justify-between items-center p-6 bg-white border-b border-gray-100">
               <h1 className="text-2xl font-bold text-gray-800">All Products</h1>
               <Link to="/admin/products/create">
@@ -60,7 +60,7 @@ function ProductList() {
               </Link>
             </div>
 
-            {/* Table */}
+            {/* table */}
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-black text-white">
@@ -121,7 +121,7 @@ function ProductList() {
               </table>
             </div>
 
-            {/* Pagination */}
+            {/* pagination */}
             <div className="bg-gray-50 border-t border-gray-200 p-4">
               <GenericPagination
                 currentPage={currentPage}

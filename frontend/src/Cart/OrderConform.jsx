@@ -34,13 +34,13 @@ function OrderConform() {
       <CheckoutPath activePath={1} />
 
       <div className="max-w-6xl mx-auto px-4 py-10 space-y-10">
-        <h1 className="text-3xl font-bold text-center text-blue-800 mb-4">Order Confirmation</h1>
+        <h1 className="text-3xl font-bold text-center text-black uppercase mb-4">Order Confirmation</h1>
 
         {/* Shipping Details Table */}
         <div className="overflow-x-auto">
           <table className="min-w-full table-auto border-collapse border border-gray-300 shadow-md rounded-lg">
-            <caption className="caption-top text-xl font-semibold text-left p-2">Shipping Details</caption>
-            <thead className="bg-blue-100 text-blue-800">
+            <caption className="caption-top text-xl font-bold uppercase text-left p-2">Shipping Details</caption>
+            <thead className="bg-black text-white uppercase">
               <tr>
                 <th className="border p-2">Name</th>
                 <th className="border p-2">Phone</th>
@@ -62,8 +62,8 @@ function OrderConform() {
         {/* cartitms */}
         <div className="overflow-x-auto">
           <table className="min-w-full table-auto border-collapse border border-gray-300 shadow-md rounded-lg">
-            <caption className="caption-top text-xl font-semibold text-left p-2">Cart Items</caption>
-            <thead className="bg-blue-100 text-blue-800">
+            <caption className="caption-top text-xl font-bold uppercase text-left p-2">Cart Items</caption>
+            <thead className="bg-black text-white uppercase">
               <tr>
                 <th className="border p-2">Image</th>
                 <th className="border p-2">Product Name</th>
@@ -91,8 +91,8 @@ function OrderConform() {
         {/* order */}
         <div className="overflow-x-auto">
           <table className="min-w-full table-auto border-collapse border border-gray-300 shadow-md rounded-lg">
-            <caption className="caption-top text-xl font-semibold text-left p-2">Order Summary</caption>
-            <thead className="bg-blue-100 text-blue-800">
+            <caption className="caption-top text-xl font-bold uppercase text-left p-2">Order Summary</caption>
+            <thead className="bg-black text-white uppercase">
               <tr>
                 <th className="border p-2">Subtotal</th>
                 <th className="border p-2">Shipping Charges</th>

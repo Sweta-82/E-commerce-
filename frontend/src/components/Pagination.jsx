@@ -32,7 +32,7 @@ function Pagination({
 
   return (
     <div className="flex flex-wrap justify-center gap-2 mt-6">
-      {/* First & Prev */}
+      {/* first & prev */}
       {currentPage > 1 && (
         <>
           <button
@@ -50,23 +50,22 @@ function Pagination({
         </>
       )}
 
-      {/* Page Numbers */}
+      {/* page numbers */}
       {getPageNumbers().map((number) => (
         <button
           key={number}
           onClick={() => onPageChange(number)}
           className={`px-3 py-1 text-sm font-medium border rounded 
-            ${
-              currentPage === number
-                ? 'bg-blue-600 text-white border-blue-600'
-                : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
+            ${currentPage === number
+              ? 'bg-blue-600 text-white border-blue-600'
+              : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
             }`}
         >
           {number}
         </button>
       ))}
 
-      {/* Next & Last */}
+      {/*   next & last */}
       {currentPage < totalPages && (
         <>
           <button

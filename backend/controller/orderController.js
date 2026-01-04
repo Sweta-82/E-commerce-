@@ -39,6 +39,12 @@ export const getSingleOrder = handleAsyncError(async (req, res, next) => {
     if (!order) {
         return next(new HandleError("No order found", 404));
     }
+
+    // Allow if admin or if the order belongs to the user
+    if (req.user.role !== "admin" && order.user._id.toString() !== req.user._id.toString()) {
+        return next(new HandleError("You are not authorized to view this order", 403));
+    }
+
     res.status(200).json({
         success: true,
         order
@@ -118,11 +124,11 @@ export const updateOrderStatus = handleAsyncError(async (req, res, next) => {
 
 // get orders for products created by the specific admin
 export const getAdminProductOrders = handleAsyncError(async (req, res, next) => {
-    // 1. Find all products created by this user (admin)
+    // 1. find all products created by this user (admin)
     const products = await Product.find({ user: req.user._id });
     const productIds = products.map(product => product._id);
 
-    // 2. Find all orders that contain any of these products
+    // 2. find all orders that contain any of these products
     const orders = await Order.find({
         "orderItems.product": { $in: productIds }
     });
@@ -137,7 +143,7 @@ export const getAdminProductOrders = handleAsyncError(async (req, res, next) => 
     });
 });
 
-// Mark admin notifications as read
+// mark admin notifications as read
 export const markNotificationsAsRead = handleAsyncError(async (req, res, next) => {
     const products = await Product.find({ user: req.user._id });
     const productIds = products.map(product => product._id);
