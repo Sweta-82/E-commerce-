@@ -3,7 +3,7 @@ import { CiSearch } from "react-icons/ci";
 import axios from 'axios';
 import { FaCartPlus, FaBell } from "react-icons/fa"; import { IoMdPersonAdd } from "react-icons/io";
 import { Link } from 'react-router-dom';
-import UserDashboard from '../user/userDashboard';
+import UserDashboard from '../user/UserDashboard';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { loadUser } from '../features/user/userSlice';
