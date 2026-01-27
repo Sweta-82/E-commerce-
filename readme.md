@@ -1,110 +1,132 @@
-esm 
-for dynamic port we have to used 
-**procress.env.PORT**-- used in server.js
+# 🛒 BuyNest — MERN Stack E-Commerce Platform
 
-**IN server.js we are using function bcz of scalebility**
+BuyNest is a **production-ready, full-stack E-commerce web application** built using the MERN stack.  
+It implements **role-based access (User, Admin, Super Admin)**, secure payment processing, scalable product management, and a modern, optimized UI.
 
-## we are also using this bcz it can be both post and get req this same url can we not want to reapet it again and again
-like this
-app.get("/api/v1/products",getAllProducts)
-app.post("/api/v1/products",getAllProducts)
-**So we are using this**
-app.route("/api/v1/products").get(getAllProducts)-- its advantage we can change multiple route
+🔗 **Live Project:** https://buynest-8pji.onrender.com
 
-## express.Router();-- used in productRoute
-it is a class used to handle http req
+---
 
-## model folder-- product schema
-**schema has basically table of row and columbs**
+## 📌 Key Highlights
+- Complete **authentication & authorization** system
+- **Role-based dashboards** (User / Admin / Super Admin)
+- Secure payments using **Razorpay**
+- Cloud-based image storage with **Cloudinary**
+- Optimized frontend using **Vite + Redux Toolkit**
+- Deployed and tested in **production on Render**
 
-## error 
+---
 
-Invalid scheme, expected connection string to start with "mongodb://" or "mongodb+srv://" pormises error--------unhandledRejection error used in server.js
+## ✨ Features
 
-uncaughtException used in server.js------error
+### 👤 User Features
+- User Registration, Login & Logout
+- Forgot / Reset Password via Email
+- Update Profile & Avatar
+- Product Search, Filtering & Pagination
+- Add to Cart & Place Orders
+- Secure Checkout with Razorpay
 
-mongoDB error-- casterror -- then mongodb url s incoorect
-<!-- 03:29:38 -->
+### 🛠️ Admin Features
+- Create, Update & Delete Products
+- Manage Users and Orders
+- Update Order Status
+- Upload Product Images (Cloudinary)
 
-## validator
-validator--npm i validator
-the validator package is a polular js lib used for data validation and sanitiztion in node.js
+### 🛡️ Super Admin Features
+- Full platform access
+- Admin role management
+- System-level control
 
-it has multiple method
-isEmail();checks if a string is vald email
+---
 
-bcrypt js
+## 🧰 Tech Stack
 
-## JWT-- json web token
-it is used to securely transfer infomation between two parties like from client to server **Used for authentication and authorijation**
-package-- npm i jsonwebtoken
-authorijation--- npm i cookie-parser---attched to incmoing http req--
-req.cookie-- used in middleqware-----userAuth.js
+### Frontend
+- React (Vite)
+- Redux Toolkit
+- Tailwind CSS
 
-8--7
+### Backend
+- Node.js
+- Express.js
+- MongoDB (Mongoose)
 
-for reset--- pass
-npm i crypto-- used in index.js and usermodel
+### Services & Tools
+- Razorpay (Payments)
+- Cloudinary (Image Storage)
+- Nodemailer (Email Service)
+- JWT Authentication
+- Render (Deployment)
 
+---
 
-## for snding mail
-npm i nodemailer
-we have to used google and add verification -- secaureity
-search for my app-password
+## ⚙️ Environment Variables
 
+Create a `config.env` file inside `backend/config/`:
 
-## 12-- 6:28-- 15:28---
+```env
+PORT=8000
+DB_URL=your_mongodb_connection_string
+FRONTEND_URL=https://buynest-8pji.onrender.com
 
-<!-- "name":"Sitare",
-    "email":"sitare123@gmail.com",
-    "password":123456789 -->
+JWT_SECRET_KEY=your_jwt_secret
+JWT_EXPIRE=5d
+EXPIRE_COOKIE=5
 
-## router
-npm i rect-router-dom   
+SMTP_SERVICE=gmail
+SMTP_MAIL=your_email@gmail.com
+SMTP_PASSWORD=your_app_password
 
+CLOUDINARY_NAME=your_cloud_name
+API_KEY=your_cloudinary_api_key
+API_SECRET=your_cloudinary_api_secret
 
-## slider
-
-const images = [
-  'https://i.pinimg.com/736x/f0/27/c1/f027c19f65c5f05257a1ed0bb962c6a4.jpg',
-  'https://i.pinimg.com/736x/f8/45/45/f845450f907b2aa6aa05357a66664c60.jpg',
-  'https://i.pinimg.com/736x/79/a3/ee/79a3ee7a2116d50a16d84eef280a5399.jpg',
-  'https://i.pinimg.com/736x/c4/7d/a9/c47da90759cf4cbfe08504655ceb9a66.jpg',
-  'https://i.pinimg.com/736x/82/ff/b0/82ffb0d9ab098b8b107c190863493d1a.jpg',
-];
-
-## redux ---- to read
-npm i @reduxjs/toolkit
-
-## npm i react-redux
-used to connect rect and redux
----Redux ek data manager hai jo React app ke andar ka saara data (state) sambhalta hai — ek central box me
-
-## createAsyncThunk
-used for async in rudux store
-
-## axios
-npm i axios
-
-## explore more
-useSelector()---Data get karne ke liye
-useDispatch()--useDispatch() — Data change karne ke liye
-
-## npm i react-toastify
+RAZORPAY_API_KEY=your_razorpay_key
+RAZORPAY_API_SECRET=your_razorpay_secret
+```
 
 
-## cloundinary
-npm i express-fileuplaod cloundinary
+## 📦 Installation & Local Setup
 
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/Sweta-82/E-commerce-.git
+cd E-commerce-
+```
 
+### 2️⃣ Install Dependencies
+```bash
+npm install
+cd frontend && npm install
+cd ../backend && npm install
+```
+### 3️⃣ Run the Application
+```bash
+npm run dev
+Frontend: http://localhost:5173
+Backend: http://localhost:8000
+```
 
-## expolre more about application/json and multimideajson
+### 🚀 Deployment (Render)
 
-## contry state city libery
-npm i country-state-city
+Platform: Render
+Build Command: npm run build
+Start Command: npm start
+Root Directory: Leave empty
 
+### 📈 Future Enhancements
+Wishlist functionality
+Product reviews & ratings
+Order invoice generation (PDF)
+Admin analytics dashboard
+Redis-based caching
 
-## explore more about session storage
-like why we are using this instad of local storge or redux
+### 👩‍💻 Author
+Sweta Kumari
+Full-Stack MERN Developer
+GitHub: https://github.com/Sweta-82
 
----bcz it will storage session until the website aur interfce is close
+### 📜 License
+
+This project is licensed for educational and portfolio use.
