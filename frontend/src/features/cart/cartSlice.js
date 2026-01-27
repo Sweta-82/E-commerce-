@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { logout } from "../user/userSlice";
 
 export const addItemsToCart = createAsyncThunk('cart/addItemsToCart', async ({ id, quantity }, { rejectWithValue }) => {
     try {
@@ -87,6 +88,13 @@ const cartSlice = createSlice({
             .addCase(addItemsToCart.rejected, (state) => {
                 state.loading = false,
                     state.error = action.payload?.message || 'An error occurred'
+            })
+            // Clear cart on logout
+            .addCase(logout.fulfilled, (state) => {
+                state.cartItems = [];
+                state.shippingInfo = {};
+                localStorage.removeItem('cartItems');
+                localStorage.removeItem('shippingInfo');
             })
     }
 })
